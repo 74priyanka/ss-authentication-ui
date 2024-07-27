@@ -1,16 +1,25 @@
 import React from "react";
 import Login from "../../containers/Login";
 import Signup from "../../containers/Signup";
+import Logo from "../../containers/Logo";
+import SplashScreen from "../../containers/SplashScreen";
+import ForgotPassword from "../../containers/ForgotPassword";
+import CheckEmail from "../../containers/CheckEmail";
+import Successful from "../../containers/Successful";
+import { StyledWorkerAuthUI } from "./style";
 
 const WorkerAuthUI = () => {
   return (
-    <div>
-      <h1>WorkerAuthUI page</h1>
+    <StyledWorkerAuthUI className="styled-worker-auth-ui">
+      <Logo />
+      <SplashScreen />
 
       <Login />
       <Signup />
-    </div>
+      <ForgotPassword />
+      <CheckEmail />
+      <Successful />
+    </StyledWorkerAuthUI>
   );
 };
-
 export default WorkerAuthUI;

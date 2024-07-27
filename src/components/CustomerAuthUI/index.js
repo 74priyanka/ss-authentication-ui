@@ -6,8 +6,8 @@ const CustomerAuthUI = () => {
   return (
     <div>
       <h1>CustomerAuthUI page</h1>
-      <Login />
-      <Signup />
+      {/* <Login /> */}
+      {/* <Signup /> */}
     </div>
   );
 };

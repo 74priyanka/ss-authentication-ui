@@ -1,0 +1,41 @@
+import React from "react";
+import { StyledInputs } from "./style";
+
+const Inputs = ({
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  label,
+  labelColor,
+  inputColor,
+  backgroundColor,
+  style,
+  imgSrc,
+}) => {
+  return (
+    <StyledInputs
+      className="input-containers"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "15px",
+      }}
+    >
+      <label className="input-label" style={{ color: labelColor }}>
+        {label}
+      </label>
+
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="inputs"
+        style={{ color: inputColor, backgroundColor }}
+      />
+    </StyledInputs>
+  );
+};
+
+export default Inputs;

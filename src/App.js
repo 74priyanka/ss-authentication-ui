@@ -1,13 +1,11 @@
 import React from "react";
-
-import WorkerAuthUI from "../src/components/WorkerAuthUI";
+import Router from "./routes/Router";
+import "./App.css";
 
 function App() {
   return (
     <div>
-      <div>
-        <WorkerAuthUI />
-      </div>
+      <Router />
     </div>
   );
 }

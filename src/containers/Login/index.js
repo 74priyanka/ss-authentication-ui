@@ -1,54 +1,77 @@
 import React from "react";
 import { StyledLogin } from "./style";
 import googleImg from "../../assets/google.png";
-
+import { Link, useNavigate } from "react-router-dom";
 import Buttons from "../../reusableComponents/Buttons";
 import Inputs from "../../reusableComponents/Inputs";
+import { colors } from "../../Constants/colors";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // login logic
+    navigate("/");
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgotPage");
+  };
+
+  const handleSignUp = () => {
+    navigate("/signup");
+  };
   return (
     <StyledLogin className="styled-login">
-      <div className="login-page">
-        <h1>Welcome to SkillSync</h1>
-        <p style={{ textAlign: "center", marginBottom: "40px" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor
-        </p>
-        <Inputs
-          type="text"
-          label="Email"
-          labelColor="#000"
-          inputColor="#000"
-          backgroundColor="#fff"
-        />
-        <Inputs
-          type="Password"
-          label="Password"
-          labelColor="#000"
-          inputColor="#000"
-          backgroundColor="#fff"
-        />
-        <div className="forgot-pass">
-          <label class="checkbox-container">
-            <input type="checkbox" id="rememberMe" name="rememberMe" />
-            <span class="checkmark"></span>
-            Remember Me
-          </label>
+      <h1 className="welcome-title">Welcome to SkillSync</h1>
+      <p className="welcome-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor
+      </p>
+      <Inputs
+        type="text"
+        label="Email"
+        labelColor={colors.input_label_text}
+        inputColor={colors.input_label_text}
+        backgroundColor={colors.input_bg}
+      />
+      <Inputs
+        type="Password"
+        label="Password"
+        labelColor={colors.input_label_text}
+        inputColor={colors.input_label_text}
+        backgroundColor={colors.input_bg}
+      />
+      <div className="forgot-password">
+        <label class="checkbox-label">
+          <input type="checkbox" id="rememberMe" name="rememberMe" />
+          <span class="checkbox-checkmark"></span>
+          Remember Me
+        </label>
 
-          <p>Forgot Password?</p>
-        </div>
-
-        <Buttons label="LOGIN" labelColor="white" backgroundColor="#130160" />
-        <Buttons
-          imgSrc={googleImg}
-          label="SIGN IN WITH GOOGLE"
-          labelColor="#130160"
-          backgroundColor="#d6cdfe"
-        />
-        <p>
-          You don't have an account yet? <span>Sign up</span>
+        <p className="forgot-link" onClick={handleForgotPassword}>
+          Forgot Password?
         </p>
       </div>
+
+      <Buttons
+        label="LOGIN"
+        labelColor={colors.primary_btn_label}
+        backgroundColor={colors.primary_btn_bg}
+        onClick={handleLogin}
+      />
+      <Buttons
+        imgSrc={googleImg}
+        label="SIGN IN WITH GOOGLE"
+        labelColor={colors.secondary_btn_label}
+        backgroundColor={colors.secondary_btn_bg}
+      />
+      <p className="signup-link">
+        You don't have an account yet?{" "}
+        <span className="signup-link-text" onClick={handleSignUp}>
+          Sign up
+        </span>
+      </p>
     </StyledLogin>
   );
 };

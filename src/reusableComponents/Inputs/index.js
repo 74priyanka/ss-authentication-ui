@@ -11,17 +11,9 @@ const Inputs = ({
   inputColor,
   backgroundColor,
   style,
-  imgSrc,
 }) => {
   return (
-    <StyledInputs
-      className="input-containers"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "15px",
-      }}
-    >
+    <StyledInputs className="input-container" style={style}>
       <label className="input-label" style={{ color: labelColor }}>
         {label}
       </label>
@@ -31,7 +23,7 @@ const Inputs = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="inputs"
+        className="input-field"
         style={{ color: inputColor, backgroundColor }}
       />
     </StyledInputs>

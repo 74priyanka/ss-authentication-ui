@@ -5,7 +5,7 @@ import { StyledButton } from "./style";
 
 const Button = ({ label, onClick, labelColor, backgroundColor, imgSrc }) => {
   return (
-    <StyledButton className="buttons">
+    <StyledButton className="button-container">
       <button
         className="btn "
         onClick={onClick}

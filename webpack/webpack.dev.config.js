@@ -17,6 +17,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i, // Regex to match CSS files
+        use: ["style-loader", "css-loader"], // Loaders to use for CSS files
+      },
+      {
         test: /\.(png|jpe?g|gif)$/i,
         loader: "file-loader",
         options: {

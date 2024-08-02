@@ -75,15 +75,14 @@ export const StyledLogin = styled.div`
   } */
 
   background-color: ${colors.secondary};
-  width: 100vw;
-  height: 100vh;
+  width: calc(100% - 48px);
+  height: calc(100% - 24px);
+  padding: 12px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* position: relative; */
-  /* box-sizing: border-box; */
-  margin: 0 auto; /* Center the component horizontally */
+  /* padding: 12px 24px; */
 
   .welcome-title {
     font-size: 48px;

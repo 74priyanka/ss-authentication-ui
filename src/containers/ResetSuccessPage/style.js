@@ -24,8 +24,8 @@ export const StyledResetSuccessPage = styled.div`
   } */
 
   background-color: ${colors.secondary};
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
 
   padding: 20px;

@@ -9,8 +9,8 @@ export const StyledLandingPage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw; /* Ensure full width */
-  height: 100vh; /* Ensure full height */
+  width: 100%; /* Ensure full width */
+  height: 100%; /* Ensure full height */
   background-color: ${colors.primary};
   color: white;
   text-align: center;

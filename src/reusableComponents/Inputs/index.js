@@ -3,6 +3,7 @@ import { StyledInputs } from "./style";
 
 const Inputs = ({
   type = "text",
+  name,
   value,
   onChange,
   placeholder,
@@ -20,6 +21,7 @@ const Inputs = ({
 
       <input
         type={type}
+        name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

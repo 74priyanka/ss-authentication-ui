@@ -1,37 +1,30 @@
 import React from "react";
 import { StyledSignup } from "./style";
 import googleImg from "../../assets/google.png";
-import { Link, useNavigate } from "react-router-dom";
 import Buttons from "../../reusableComponents/Buttons";
 import Inputs from "../../reusableComponents/Inputs";
 import { colors } from "../../Constants/colors";
+import useSignupHandler from "./hooks/useSignupHandler";
+import {
+  handleSignUp,
+  handleForgotPassword,
+  handleLogin,
+  handleInputChange,
+} from "./helpers";
 
-const Signup = () => {
-  const navigate = useNavigate();
-
-  const handleSignUp = () => {
-    //  signup logic
-    navigate("/");
-  };
-
-  const handleForgotPassword = () => {
-    navigate("/forgotPage");
-  };
-
-  const handleLogin = () => {
-    navigate("/login");
-  };
+const Signup = (signupTitle, signupDescription) => {
+  const { location, navigate, formData, setFormData, mutation } =
+    useSignupHandler();
 
   return (
     <StyledSignup className="styled-signup">
-      <h1 className="signup-title">Create an Account</h1>
-      <p className="signup-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor
-      </p>
+      <h1 className="signup-title">{location.state?.signupTitle}</h1>
+      <p className="signup-description">{location.state?.signupDescription}</p>
       <Inputs
         type="text"
         label="FullName"
+        name="userName"
+        onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
         backgroundColor={colors.input_bg}
@@ -39,6 +32,8 @@ const Signup = () => {
       <Inputs
         type="text"
         label="Email"
+        name="email"
+        onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
         backgroundColor={colors.input_bg}
@@ -46,6 +41,8 @@ const Signup = () => {
       <Inputs
         type="Password"
         label="Password"
+        name="password"
+        onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
         backgroundColor={colors.input_bg}
@@ -57,16 +54,18 @@ const Signup = () => {
           Remember Me
         </label>
 
-        <p className="forgot-link" onClick={handleForgotPassword}>
+        <p
+          className="forgot-link"
+          onClick={() => handleForgotPassword(navigate)}
+        >
           Forgot Password?
         </p>
       </div>
-
       <Buttons
         label="SIGNUP"
         labelColor={colors.primary_btn_label}
         backgroundColor={colors.primary_btn_bg}
-        onClick={handleSignUp}
+        onClick={() => handleSignUp(mutation, formData)}
       />
       <Buttons
         imgSrc={googleImg}
@@ -74,10 +73,12 @@ const Signup = () => {
         labelColor={colors.secondary_btn_label}
         backgroundColor={colors.secondary_btn_bg}
       />
-
       <p className="login-link">
         You don't have an account yet?{" "}
-        <span className="login-link-text" onClick={handleLogin}>
+        <span
+          className="login-link-text"
+          onClick={() => handleLogin(location, navigate)}
+        >
           Sign in
         </span>
       </p>

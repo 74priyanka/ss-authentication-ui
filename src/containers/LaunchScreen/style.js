@@ -5,51 +5,6 @@ import {
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
 export const StyledLaunchScreen = styled.div`
-  /* background-color: aliceblue;
-  width: 430px;
-  height: 800px;
-  border-radius: 20px;
-
-  .text {
-    font-size: 28px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin: 40px;
-    font-weight: 700;
-  }
-
-  .splash-image {
-    margin-left: 44px;
-    margin-top: 44px;
-  }
-
-  .dream-job {
-    font-size: 36px;
-    display: flex;
-    flex-direction: column;
-    margin-left: 32px;
-    margin-top: 64px;
-    font-weight: 700;
-  }
-
-  span {
-    color: #fca34d;
-    text-decoration: underline;
-  }
-
-  .explore {
-    color: #524b6b;
-    margin-left: 32px;
-    margin-right: 24px;
-  }
-
-  .arrow {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 40px;
-  } */
-
   background-color: ${colors.secondary};
   width: 100%;
   height: 100%;
@@ -196,35 +151,11 @@ export const StyledLaunchScreen = styled.div`
     }
   }
 
-  .arrow-link {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    cursor: pointer;
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
-      bottom: 10px;
-      right: 10px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
-      bottom: 15px;
-      right: 15px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {
-      bottom: 20px;
-      right: 20px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.SMALL_TABLET)} {
-      bottom: 25px;
-      right: 25px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
-      bottom: 30px;
-      right: 30px;
-    }
+  .button-container {
+    display: flex;
+    gap: 20px;
+    margin-top: auto; /* Pushes the buttons to the bottom of the container */
+    margin-bottom: 20px; /* Adjust space between buttons and bottom of the container */
+    width: 100%;
   }
 `;

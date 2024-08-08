@@ -3,12 +3,14 @@ import { StyledLaunchScreen } from "./style";
 import splashImage from "../../assets/splash_img.png";
 import arrowImage from "../../assets/arrow_img.png";
 import { Link, useNavigate } from "react-router-dom";
+import Buttons from "../../reusableComponents/Buttons";
+import { colors } from "../../Constants/colors";
 
 const LaunchScreen = () => {
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate("/login");
+  const handleNavigate = (welcomeText) => {
+    navigate("/login", { state: { welcomeText } });
   };
   return (
     <StyledLaunchScreen className="styled-launch-screen">
@@ -26,8 +28,23 @@ const LaunchScreen = () => {
         </p>
       </div>
 
-      <div className="arrow-link">
-        <img src={arrowImage} alt="" onClick={handleLogin} />
+      <div className="button-container">
+        <Buttons
+          label="Need a Service"
+          labelColor={colors.primary_btn_label}
+          backgroundColor={colors.primary_btn_bg}
+          onClick={() =>
+            handleNavigate("Quality Service at Your Doorstep: Book a Worker")
+          }
+        />
+        <Buttons
+          label="Want to Work"
+          labelColor={colors.primary_btn_label}
+          backgroundColor={colors.primary_btn_bg}
+          onClick={() =>
+            handleNavigate("Empower Your Skills: Join as a Worker")
+          }
+        />
       </div>
     </StyledLaunchScreen>
   );

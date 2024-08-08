@@ -13,3 +13,16 @@ export const LAYOUT_MEDIA_QUERY_BREAKPOINTS = {
 
 export const mediaQuery = (breakpoint) =>
   `@media only screen and ${breakpoint}`;
+
+export const REM_SIZES = {
+  MOBILE_SMALL: "0.8rem",
+  MOBILE_MEDIUM: "0.9rem",
+  MOBILE_LARGE: "1rem",
+  SMALL_TABLET: "1.1rem",
+  TABLET: "1.2rem",
+  WEB: "1.3rem",
+  DESKTOP: "1.4rem",
+  LARGE_DESKTOP: "1.5rem",
+  XL_DESKTOP: "1.6rem",
+  XXL_DESKTOP: "1.7rem",
+};

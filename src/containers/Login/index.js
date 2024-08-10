@@ -5,6 +5,7 @@ import Buttons from "../../reusableComponents/Buttons";
 import Inputs from "../../reusableComponents/Inputs";
 import { colors } from "../../Constants/colors";
 import useLoginHandler from "./hooks/useLoginHandler";
+
 import {
   handleInputChange,
   handleForgotPassword,
@@ -12,15 +13,19 @@ import {
   handleSignUp,
 } from "./helpers";
 
-const Login = (welcomeText) => {
-  const { location, navigate, formData, setFormData, mutation } =
+const Login = () => {
+  const { navigate, formData, setFormData, mutation, userType } =
     useLoginHandler();
 
   return (
     <StyledLogin className="styled-login">
       <h1 className="welcome-title">Welcome to SkillSync</h1>{" "}
       {/*  will come through props */}
-      <p className="welcome-text">{location.state?.welcomeText}</p>
+      <p className="welcome-text">
+        {userType === "customer"
+          ? "Quality Service at Your Doorstep: Book a Worker"
+          : "Empower Your Skills: Join as a Worker"}
+      </p>
       <Inputs
         type="text"
         label="Email"
@@ -71,7 +76,7 @@ const Login = (welcomeText) => {
         You don't have an account yet?{" "}
         <span
           className="signup-link-text"
-          onClick={() => handleSignUp(location, navigate)}
+          onClick={() => handleSignUp(navigate, userType)}
         >
           Sign up
         </span>

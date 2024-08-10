@@ -14,14 +14,7 @@ export const handleForgotPassword = (navigate) => {
   navigate("/forgotPage");
 };
 
-export const handleLogin = (location, navigate) => {
-  let welcomeText = "";
-
-  if (location.state?.signupTitle === "Create an Account as a Customer") {
-    welcomeText = "Quality Service at Your Doorstep: Book a Worker";
-  } else if (location.state?.signupTitle === "Create an Account as a Worker") {
-    welcomeText = "Empower Your Skills: Join as a Worker";
-  }
-
-  navigate("/login", { state: { welcomeText } });
+export const handleLogin = (navigate, userType) => {
+  const loginUrl = `/login/${userType}`;
+  navigate(loginUrl);
 };

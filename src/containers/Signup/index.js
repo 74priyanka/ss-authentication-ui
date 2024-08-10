@@ -12,14 +12,22 @@ import {
   handleInputChange,
 } from "./helpers";
 
-const Signup = (signupTitle, signupDescription) => {
-  const { location, navigate, formData, setFormData, mutation } =
+const Signup = () => {
+  const { navigate, formData, setFormData, mutation, userType } =
     useSignupHandler();
 
   return (
     <StyledSignup className="styled-signup">
-      <h1 className="signup-title">{location.state?.signupTitle}</h1>
-      <p className="signup-description">{location.state?.signupDescription}</p>
+      <h1 className="signup-title">
+        {userType === "customer"
+          ? "Create an Account as a Customer"
+          : "Create an Account as a Worker"}
+      </h1>
+      <p className="signup-description">
+        {userType === "customer"
+          ? "Experience Quality Service: Create Your Customer Account Today"
+          : "Start Your Journey with Us: Create Your Worker Account Today"}
+      </p>
       <Inputs
         type="text"
         label="FullName"
@@ -77,7 +85,7 @@ const Signup = (signupTitle, signupDescription) => {
         You don't have an account yet?{" "}
         <span
           className="login-link-text"
-          onClick={() => handleLogin(location, navigate)}
+          onClick={() => handleLogin(navigate, userType)}
         >
           Sign in
         </span>

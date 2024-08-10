@@ -9,6 +9,7 @@ import ResetSuccessPage from "../containers/ResetSuccessPage";
 import Error from "./Error";
 import AppLayout from "./AppLayout";
 import { createBrowserRouter } from "react-router-dom";
+import HomeScreen from "../containers/HomeScreen";
 
 const appRouter = createBrowserRouter([
   {
@@ -24,11 +25,11 @@ const appRouter = createBrowserRouter([
         element: <LaunchScreen />,
       },
       {
-        path: "/login",
+        path: "/login/:userType",
         element: <Login />,
       },
       {
-        path: "/signup",
+        path: "/signup/:userType",
         element: <Signup />,
       },
       {
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/resetSuccessPage",
         element: <ResetSuccessPage />,
+      },
+      {
+        path: "/homescreen",
+        element: <HomeScreen />,
       },
     ],
     errorElement: <Error />,

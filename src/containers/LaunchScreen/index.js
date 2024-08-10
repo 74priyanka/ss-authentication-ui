@@ -9,9 +9,14 @@ import { colors } from "../../Constants/colors";
 const LaunchScreen = () => {
   const navigate = useNavigate();
 
-  const handleNavigate = (welcomeText) => {
-    navigate("/login", { state: { welcomeText } });
+  const handleCustomer = () => {
+    navigate("/login/customer");
   };
+
+  const handleWorker = () => {
+    navigate("/login/worker");
+  };
+
   return (
     <StyledLaunchScreen className="styled-launch-screen">
       <p className="app-title">SkillSync</p>
@@ -33,17 +38,13 @@ const LaunchScreen = () => {
           label="Need a Service"
           labelColor={colors.primary_btn_label}
           backgroundColor={colors.primary_btn_bg}
-          onClick={() =>
-            handleNavigate("Quality Service at Your Doorstep: Book a Worker")
-          }
+          onClick={handleCustomer}
         />
         <Buttons
           label="Want to Work"
           labelColor={colors.primary_btn_label}
           backgroundColor={colors.primary_btn_bg}
-          onClick={() =>
-            handleNavigate("Empower Your Skills: Join as a Worker")
-          }
+          onClick={handleWorker}
         />
       </div>
     </StyledLaunchScreen>

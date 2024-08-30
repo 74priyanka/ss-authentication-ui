@@ -1,69 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledDropDown } from "./style";
+import { jobCategories } from "../../Constants/jobCategories";
 
-const DropDown = ({
-  label,
-  options,
-  onSelect,
-  bgColor,
-  textColor,
-  labelColor,
-  arrowColor,
-}) => {
-  const [open, setOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const handleToggle = () => setOpen(!open);
-  const handleSelect = (option) => {
-    setSelectedOption(option);
-    onSelect(option);
-    setOpen(false);
+const DropDown = ({ dropDownLabel, setDropDownLabel }) => {
+  const handleChange = (event) => {
+    console.log("dropdown", event.target.value);
+    setDropDownLabel(event.target.value);
   };
 
   return (
     <StyledDropDown>
-      {label && (
-        <label labelColor={labelColor} className="label">
-          {label}
-        </label>
-      )}
-      <div className="drop-down-wrapper">
-        <div
-          type="text"
-          //   value={selectedOption}
-          //   readOnly
-          onClick={handleToggle}
-          style={{ backgroundColor: bgColor, color: textColor }}
-          //   bgColor={bgColor}
-          //   textColor={textColor}
-          //   placeholder="Select Category"
-          className="drop-down-input"
-        >
-          {" "}
-          {selectedOption || "Select Category"}
-        </div>
-        <div
-          arrowColor={arrowColor}
-          className="drop-down-arrow"
-          style={{ color: arrowColor }}
-        >
-          ▼
-        </div>
-      </div>
-
-      {open && (
-        <div className="drop-down-menu">
-          {options.map((option, index) => (
-            <div
-              key={index}
-              className="drop-down-option"
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </div>
-          ))}
-        </div>
-      )}
+      <label htmlFor="jobCategories">Choose a category:</label>
+      <select
+        name="jobCategories"
+        id="jobCategories"
+        onChange={handleChange}
+        value={dropDownLabel}
+      >
+        <option value="">Select an option</option>
+        {jobCategories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
     </StyledDropDown>
   );
 };

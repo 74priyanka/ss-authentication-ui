@@ -40,6 +40,26 @@ export const workerSignup = async (credentials) => {
   }
 };
 
+//handling profiles
+export const fetchProfileData = async () => {
+  try {
+    const response = await fetch(`${API_URL}/workers/getProfile`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching profile data:", error);
+    throw error;
+  }
+};
+
 //handle create job post
 
 export const createJobPost = async (createJobData) => {

@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buttons from "../../../reusableComponents/Buttons";
 import Inputs from "../../../reusableComponents/Inputs";
 import { colors } from "../../../Constants/colors";
 import Remove from "../../../assets/Remove.png";
 import { StyledCreateJobPost } from "./style";
-import { jobCategories } from "../../../Constants/jobCategories";
 import DropDown from "../../../reusableComponents/DropDown";
 import TimePicker from "../../../reusableComponents/TimePicker";
 import DatePicker from "../../../reusableComponents/DatePicker";
 import { useCreateJobPostHandler } from "./hooks/useCreateJobPostHandler";
-import { useNavigate } from "react-router-dom";
+import { useUpdateJobPostHandler } from "../ShowJobPost/hooks/useUpdateJobPostHandler";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const CreateJobPost = () => {
   const navigate = useNavigate();
-  const [dropDownLabel, setDropDownLabel] = useState("select option");
-  const [time, setTime] = useState("00:00");
-  const [date, setDate] = useState("yyyy-mm-dd");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
+  const location = useLocation();
+  const job = location.state?.job;
+  const [dropDownLabel, setDropDownLabel] = useState(
+    job?.category || "select option"
+  );
+  const [time, setTime] = useState(
+    job?.service_availability_duration || "00:00"
+  );
+  const [date, setDate] = useState(job?.date || "yyyy-mm-dd");
+  const [price, setPrice] = useState(job?.price || 0);
+  const [description, setDescription] = useState(job?.job_description || "");
 
   const jobPostMutation = useCreateJobPostHandler();
+  const updateJobPostMutation = useUpdateJobPostHandler();
 
   const handlePrice = (event) => {
     setPrice(event.target.value);
@@ -29,7 +36,7 @@ const CreateJobPost = () => {
     setDescription(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log("save button clicked");
     const dataSendToBackend = {
       date: date,
@@ -38,16 +45,23 @@ const CreateJobPost = () => {
       dropDownLabel: dropDownLabel,
       price: price,
     };
-    jobPostMutation.mutate(dataSendToBackend, {
-      onSuccess: () => {
-        navigate("/showJobPost");
-      },
-      onError: (error) => {
-        console.error("Error creating job post:", error);
-      },
-    });
 
-    console.log("data to be sent to backend", dataSendToBackend);
+    try {
+      if (job) {
+        // Update job post
+        await updateJobPostMutation.mutateAsync({
+          jobId: job._id,
+          updateJobData: dataSendToBackend,
+        });
+      } else {
+        // Create new job post
+        await jobPostMutation.mutateAsync(dataSendToBackend);
+      }
+      // Navigate back to ShowJobPost after successful save
+      navigate("/showJobPost");
+    } catch (error) {
+      console.error("Error during save:", error);
+    }
   };
 
   const handleCancel = () => {
@@ -63,7 +77,7 @@ const CreateJobPost = () => {
     <StyledCreateJobPost className="create-job-post">
       <div className="create-job-post__header">
         <img src={Remove} alt="" />
-        <h2>Create new Job</h2>
+        <h2>{job ? "Edit Job" : "Create new Job"}</h2>
       </div>
       <div className="input containers">
         <DropDown

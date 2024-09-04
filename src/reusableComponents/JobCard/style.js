@@ -25,4 +25,22 @@ export const StyledJobCard = styled.div`
     border-radius: 8px;
     padding: 8px;
   }
+
+  .options-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    z-index: 10;
+  }
+
+  .options-menu img {
+    cursor: pointer;
+    margin: 5px 0;
+  }
 `;

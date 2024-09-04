@@ -19,35 +19,11 @@ const ShowJobPost = () => {
 
   return (
     <StyledShowJobPost className="container">
-      {jobListings.map((job, index) => (
-        <JobCard key={index} job={job} />
+      {jobListings.map((job) => (
+        <JobCard key={job._id} job={job} />
       ))}
     </StyledShowJobPost>
   );
 };
 
 export default ShowJobPost;
-
-/*const [jobListings, setJobListings] = useState([]);
-
-useEffect(() => {
-  const fetchJobListings = async () => {
-    try {
-      const data = await getJobListings();
-      setJobListings(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchJobListings();
-}, []);
-
-return (
-  <StyledShowJobPost className="container">
-    {jobListings.map((job, index) => (
-      <JobCard key={index} job={job} />
-    ))}
-  </StyledShowJobPost>
-);
-};
-**/

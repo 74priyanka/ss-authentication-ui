@@ -89,3 +89,52 @@ export const getJobListings = async () => {
     throw error;
   }
 };
+
+export const updateJobListings = async (id, updateJobData) => {
+  try {
+    const payload = {
+      category: updateJobData.dropDownLabel,
+      service_availability_duration: updateJobData.time,
+      date: updateJobData.date,
+      price: updateJobData.price,
+      job_description: updateJobData.description,
+    };
+    console.log("Payload sent to API:", payload);
+
+    const response = await fetch(`${API_URL}/workers/updateJobListing/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating job listings:", error);
+    throw error;
+  }
+};
+
+export const deleteJobListings = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/workers/deleteJobListing/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error deleting job listings:", error);
+    throw error;
+  }
+};

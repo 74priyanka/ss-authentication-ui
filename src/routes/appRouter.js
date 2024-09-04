@@ -95,6 +95,10 @@ const appRouter = createBrowserRouter([
         element: <CreateJobPost />,
       },
       {
+        path: "/editJobPost",
+        element: <CreateJobPost />,
+      },
+      {
         path: "/showJobPost",
         element: <ShowJobPost />,
       },

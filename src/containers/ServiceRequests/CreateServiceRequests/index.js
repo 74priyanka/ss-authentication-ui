@@ -16,47 +16,48 @@ const CreateServiceRequests = () => {
   const location = useLocation();
   const service = location.state?.service;
 
-  // Update state variables to match backend keys
+  // State variables for form fields
   const [name, setName] = useState(service?.name || "");
   const [contact, setContact] = useState(service?.contact || "");
-  const [service_requested, setServiceRequested] = useState(
+  const [serviceCategory, setServiceCategory] = useState(
     service?.service_requested || "Select Service"
   );
   const [description, setDescription] = useState(service?.description || "");
-  const [requestedDate, setRequestedDate] = useState(
+  const [dateRequested, setDateRequested] = useState(
     service?.requestedDate
       ? new Date(service.requestedDate).toISOString().split("T")[0]
       : "yyyy-mm-dd"
   );
-  const [requestedTime, setRequestedTime] = useState(
+  const [timeRequested, setTimeRequested] = useState(
     service?.requestedTime || "00:00"
   );
   const [address, setAddress] = useState(service?.address || "");
-  const [estimatedDuration, setEstimatedDuration] = useState(
+  const [duration, setDuration] = useState(
     service?.estimatedDuration || "00:00"
   );
   const [price, setPrice] = useState(service?.price || 0);
 
+  // Mutation hooks
   const serviceRequestsMutation = useCreateServiceRequestsHandler();
   const updateServiceRequestsMutation = useUpdateServiceRequestsHandler();
 
   const handleSave = async () => {
-    // Ensure that field names match backend keys
+    // Map state variables to backend keys
     const dataSendToBackend = {
-      name: name,
+      customerName: name,
       contact: contact,
-      service_requested: service_requested,
+      serviceCategory: serviceCategory,
       description: description,
-      requestedDate: requestedDate,
-      requestedTime: requestedTime,
+      dateRequested: dateRequested,
+      timeRequested: timeRequested,
       address: address,
-      estimatedDuration: estimatedDuration,
+      duration: duration,
       price: price,
     };
 
     try {
       if (service) {
-        // Update service request
+        // Update service request if service exists
         await updateServiceRequestsMutation.mutateAsync({
           serviceId: service._id,
           updateServiceData: dataSendToBackend,
@@ -74,21 +75,21 @@ const CreateServiceRequests = () => {
   const handleCancel = () => {
     setName("");
     setContact("");
-    setServiceRequested("Select Service");
+    setServiceCategory("Select Service");
     setDescription("");
-    setRequestedDate("yyyy-mm-dd");
-    setRequestedTime("00:00");
+    setDateRequested("yyyy-mm-dd");
+    setTimeRequested("00:00");
     setAddress("");
-    setEstimatedDuration("00:00");
+    setDuration("00:00");
     setPrice(0);
   };
 
   return (
     <StyledCreateServiceRequests className="create-service-request">
       <div className="create-service-request-header">
-        <img src={Remove} alt="" />
+        <img src={Remove} alt="Remove Icon" />
         <h2>
-          {service ? "Edit Service Request" : "Create new Service Request "}
+          {service ? "Edit Service Request" : "Create New Service Request"}
         </h2>
       </div>
       <div className="input containers">
@@ -109,9 +110,9 @@ const CreateServiceRequests = () => {
           backgroundColor={colors.input_bg}
         />
         <DropDown
-          name="service_requested"
-          dropDownLabel={service_requested}
-          setDropDownLabel={setServiceRequested}
+          name="serviceCategory"
+          dropDownLabel={serviceCategory}
+          setDropDownLabel={setServiceCategory}
         />
         <Inputs
           label="Address"
@@ -131,20 +132,20 @@ const CreateServiceRequests = () => {
           backgroundColor={colors.input_bg}
         />
         <TimePicker
-          name="requestedTime"
-          time={requestedTime}
-          setTime={setRequestedTime}
+          name="timeRequested"
+          time={timeRequested}
+          setTime={setTimeRequested}
         />
         <DatePicker
-          name="requestedDate"
-          date={requestedDate}
-          setDate={setRequestedDate}
+          name="dateRequested"
+          date={dateRequested}
+          setDate={setDateRequested}
         />
         <Inputs
           label="Duration"
-          name="estimatedDuration"
-          value={estimatedDuration}
-          onChange={(e) => setEstimatedDuration(e.target.value)}
+          name="duration"
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
           labelColor={colors.input_label_text}
           backgroundColor={colors.input_bg}
         />

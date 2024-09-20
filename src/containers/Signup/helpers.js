@@ -6,8 +6,9 @@ export const handleInputChange = (e, setFormData) => {
   }));
 };
 
-export const handleSignUp = (mutation, formData) => {
+export const handleSignUp = (mutation, formData, navigate) => {
   mutation.mutate(formData);
+  navigate("/homescreen");
 };
 
 export const handleForgotPassword = (navigate) => {

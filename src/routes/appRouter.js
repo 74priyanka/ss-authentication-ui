@@ -20,6 +20,8 @@ import Certifications from "../containers/ProfilePage/components/Certifications"
 import IdentityVerify from "../containers/ProfilePage/components/IdentityVerify";
 import CreateJobPost from "../containers/JobPosting/CreateJobPost";
 import ShowJobPost from "../containers/JobPosting/ShowJobPost";
+import CreateServiceRequests from "../containers/ServiceRequests/CreateServiceRequests";
+import ShowServiceRequests from "../containers/ServiceRequests/ShowServiceRequests";
 
 const appRouter = createBrowserRouter([
   {
@@ -101,6 +103,18 @@ const appRouter = createBrowserRouter([
       {
         path: "/showJobPost",
         element: <ShowJobPost />,
+      },
+      {
+        path: "/createServiceRequests",
+        element: <CreateServiceRequests />,
+      },
+      {
+        path: "/editServiceRequests",
+        element: <CreateServiceRequests />,
+      },
+      {
+        path: "/showServiceRequests",
+        element: <ShowServiceRequests />,
       },
     ],
     errorElement: <Error />,

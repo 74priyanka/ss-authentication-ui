@@ -2,7 +2,7 @@ import React from "react";
 import { StyledDropDown } from "./style";
 import { jobCategories } from "../../Constants/jobCategories";
 
-const DropDown = ({ dropDownLabel, setDropDownLabel }) => {
+const DropDown = ({ name, dropDownLabel, setDropDownLabel }) => {
   const handleChange = (event) => {
     console.log("dropdown", event.target.value);
     setDropDownLabel(event.target.value);
@@ -10,13 +10,8 @@ const DropDown = ({ dropDownLabel, setDropDownLabel }) => {
 
   return (
     <StyledDropDown>
-      <label htmlFor="jobCategories">Choose a category:</label>
-      <select
-        name="jobCategories"
-        id="jobCategories"
-        onChange={handleChange}
-        value={dropDownLabel}
-      >
+      <label htmlFor="categories">Choose a category:</label>
+      <select name={name} onChange={handleChange} value={dropDownLabel}>
         <option value="">Select an option</option>
         {jobCategories.map((category, index) => (
           <option key={index} value={category}>

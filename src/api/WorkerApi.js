@@ -41,7 +41,7 @@ export const workerSignup = async (credentials) => {
 };
 
 //handling profiles
-export const fetchProfileData = async () => {
+export const fetchWorkerProfileData = async () => {
   try {
     const response = await fetch(`${API_URL}/workers/getProfile`, {
       method: "GET",

@@ -1,15 +1,15 @@
 import React from "react";
-import profilePic from "../../assets/profilePic.png";
-import ProfileCardData from "../../reusableComponents/ProfileCardData";
-import { cardData } from "../../Constants/profileContent";
-import { StyledProfilePage } from "./style";
+import profilePic from "../../../assets/profilePic.png";
+import ProfileCardData from "../../../reusableComponents/ProfileCardData";
+import { cardData } from "../../../Constants/profileContent";
+import { StyledCustomerProfile } from "./style";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProfileData } from "../../api/WorkerApi";
+import { fetchCustomerProfileData } from "../../../api/CustomerApi";
 
-const ProfilePage = () => {
+const CustomerProfile = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profileData"],
-    queryFn: fetchProfileData,
+    queryFn: fetchCustomerProfileData,
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -18,7 +18,7 @@ const ProfilePage = () => {
   // Assuming the data is an array of profiles
   const profileName = data[0]?.name || "No Name Available";
   return (
-    <StyledProfilePage>
+    <StyledCustomerProfile>
       <div className="profile-page__header">
         <img src={profilePic} alt="" />
         <p className="profile-name">{profileName}</p>
@@ -34,8 +34,8 @@ const ProfilePage = () => {
           />
         ))}
       </div>
-    </StyledProfilePage>
+    </StyledCustomerProfile>
   );
 };
 
-export default ProfilePage;
+export default CustomerProfile;

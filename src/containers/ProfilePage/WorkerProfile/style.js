@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../../Constants/colors";
+import { colors } from "../../../Constants/colors";
 
-export const StyledProfilePage = styled.div`
+export const StyledWorkerProfile = styled.div`
   background-color: ${colors.secondary};
 
   .profile-page__header {

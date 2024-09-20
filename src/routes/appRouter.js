@@ -6,7 +6,8 @@ import Signup from "../containers/Signup";
 import ForgotPage from "../containers/ForgotPage";
 import EmailPage from "../containers/EmailPage";
 import ResetSuccessPage from "../containers/ResetSuccessPage";
-import ProfilePage from "../containers/ProfilePage";
+import WorkerProfile from "../containers/ProfilePage/WorkerProfile";
+import CustomerProfile from "../containers/ProfilePage/CustomerProfile";
 import Error from "./Error";
 import AppLayout from "./AppLayout";
 import { createBrowserRouter } from "react-router-dom";
@@ -61,8 +62,12 @@ const appRouter = createBrowserRouter([
         element: <HomeScreen />,
       },
       {
-        path: "/profilePage",
-        element: <ProfilePage />,
+        path: "/workerProfile",
+        element: <WorkerProfile />,
+      },
+      {
+        path: "/customerProfile",
+        element: <CustomerProfile />,
       },
       {
         path: "/aboutMe",

@@ -81,6 +81,7 @@ const CreateJobPost = () => {
       </div>
       <div className="input containers">
         <DropDown
+          name="Job Categories"
           dropDownLabel={dropDownLabel}
           setDropDownLabel={setDropDownLabel}
         />

@@ -8,14 +8,8 @@ const DatePicker = ({ setDate, date }) => {
   };
   return (
     <StyledDatePicker>
-      <label for="birthday">Birthday:</label>
-      <input
-        type="date"
-        id="birthday"
-        name="birthday"
-        onChange={handleChange}
-        value={date}
-      />
+      <label for="date">Date:</label>
+      <input type="date" name="date" onChange={handleChange} value={date} />
     </StyledDatePicker>
   );
 };

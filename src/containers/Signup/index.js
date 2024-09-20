@@ -73,7 +73,7 @@ const Signup = () => {
         label="SIGNUP"
         labelColor={colors.primary_btn_label}
         backgroundColor={colors.primary_btn_bg}
-        onClick={() => handleSignUp(mutation, formData)}
+        onClick={() => handleSignUp(mutation, formData, navigate)}
       />
       <Buttons
         imgSrc={googleImg}

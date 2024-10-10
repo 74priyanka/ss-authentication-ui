@@ -13,14 +13,14 @@ const CustomerHomeScreen = () => {
   const navigate = useNavigate();
 
   const handleJobCard = () => {
-    navigate("/showJobPost");
+    navigate("/showServiceRequests");
   };
   const handleAddJob = () => {
-    navigate("/createJobPost");
+    navigate("/createServiceRequests");
   };
 
-  const handleJobs = () => {
-    navigate("/showJobPost");
+  const handleProfile = () => {
+    navigate("/customerProfile");
   };
 
   return (
@@ -30,7 +30,12 @@ const CustomerHomeScreen = () => {
         <h1 className="title">
           Welcome <span>Priyanka Chauhan</span>
         </h1>
-        <img src={profilePic} alt="" className="profile-pic" />
+        <img
+          src={profilePic}
+          alt=""
+          className="profile-pic"
+          onClick={handleProfile}
+        />
       </header>
 
       <div className="promotion">
@@ -52,12 +57,6 @@ const CustomerHomeScreen = () => {
           <p>Part Time</p>
         </div>
       </div>
-      <h3 className="recent-jobs">Recent Job List</h3>
-      <h3 onClick={handleJobs}>Show Job List</h3>
-      {/* <div className="job-list">
-        <img src="" alt="" />
-        <h3>Electrician</h3>
-      </div> */}
 
       <div className="nav-items-list">
         <img src={Home} alt="" />

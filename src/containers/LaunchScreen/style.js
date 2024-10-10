@@ -73,6 +73,7 @@ export const StyledLaunchScreen = styled.div`
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
       width: 320px;
       height: auto;
+      top: 35%;
     }
   }
 
@@ -83,7 +84,7 @@ export const StyledLaunchScreen = styled.div`
     align-items: flex-start;
     position: absolute;
     left: 20px;
-    bottom: 20%;
+    bottom: 24%;
     font-weight: 700;
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
@@ -120,9 +121,9 @@ export const StyledLaunchScreen = styled.div`
   .explore-description {
     color: #524b6b;
     position: absolute;
-    left: 20px; /* Ensure left alignment is the same as job-tagline */
+
     margin: 0;
-    bottom: 7%;
+    bottom: 12%;
     font-size: 30px;
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
@@ -132,7 +133,8 @@ export const StyledLaunchScreen = styled.div`
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
       font-size: 24px;
-      bottom: 18%;
+      bottom: 15%;
+      margin: 5px;
     }
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {

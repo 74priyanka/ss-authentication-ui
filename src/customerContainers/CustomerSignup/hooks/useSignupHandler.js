@@ -1,27 +1,26 @@
-import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { workerLogin } from "../../../api/WorkerApi";
+import { customerSignup } from "../../../api/CustomerApi";
 
-const useLoginHandler = () => {
-  // Custom hook definition
+const useSignupHandler = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    userName: "",
     email: "",
     password: "",
   });
 
-  const workerMutation = useMutation({
-    mutationFn: (credentials) => workerLogin(credentials),
+  const customerMutation = useMutation({
+    mutationFn: (credentials) => customerSignup(credentials),
     onSuccess: (data) => {
-      console.log("Worker login successful:", data);
-      navigate("/homescreen");
+      console.log("customer signup successful:", data);
+      navigate("/customer-homescreen");
     },
     onError: (error) => {
-      console.log("Worker login failed:", error);
+      console.error("customer signup failed:", error);
     },
   });
 
@@ -29,8 +28,8 @@ const useLoginHandler = () => {
     navigate,
     formData,
     setFormData,
-    workerMutation,
+    customerMutation,
   };
 };
 
-export default useLoginHandler;
+export default useSignupHandler;

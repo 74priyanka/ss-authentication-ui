@@ -14,6 +14,7 @@ export const workerLogin = async (credentials) => {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    console.log("worker data", data);
     sessionStorage.setItem("profile", JSON.stringify(data));
 
     return data;

@@ -36,6 +36,11 @@ export const StyledButton = styled.div`
     background-color: ${colors.primary}; /* Default background color */
     color: white; /* Default text color */
     cursor: pointer;
+    &:hover {
+      cursor: pointer;
+      transition: box-shadow 0.5s ease;
+      box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.15);
+    }
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
       font-size: 14px;

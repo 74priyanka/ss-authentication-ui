@@ -14,6 +14,7 @@ export const customerLogin = async (credentials) => {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    sessionStorage.setItem("CustomerProfile", JSON.stringify(data));
     return data;
   } catch (error) {
     console.error(error);
@@ -38,6 +39,15 @@ export const customerSignup = async (credentials) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+//
+export const fetchCustomerUserProfileData = async (profileId) => {
+  const response = await fetch(`${API_URL}/customers/profile/${profileId}`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
 };
 
 //handling profiles

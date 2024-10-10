@@ -11,7 +11,7 @@ export const StyledInputs = styled.div`
 
   .input-label {
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 24px;
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
       font-size: 12px;
@@ -27,10 +27,10 @@ export const StyledInputs = styled.div`
   }
 
   .input-field {
-    padding: 4px;
+    padding: 12px;
     border: none;
     border-radius: 8px;
-    font-size: 40px;
+    font-size: 16px;
     width: 100%;
     box-sizing: border-box;
 

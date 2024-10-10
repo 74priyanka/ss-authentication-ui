@@ -24,9 +24,7 @@ const CreateServiceRequests = () => {
   );
   const [description, setDescription] = useState(service?.description || "");
   const [dateRequested, setDateRequested] = useState(
-    service?.requestedDate
-      ? new Date(service.requestedDate).toISOString().split("T")[0]
-      : "yyyy-mm-dd"
+    service?.requestedDate || "yyyy-mm-dd"
   );
   const [timeRequested, setTimeRequested] = useState(
     service?.requestedTime || "00:00"
@@ -82,13 +80,24 @@ const CreateServiceRequests = () => {
     setAddress("");
     setDuration("00:00");
     setPrice(0);
+
+    navigate("/customer-homescreen");
+  };
+
+  const handleRemove = () => {
+    navigate("/customer-homescreen");
   };
 
   return (
-    <StyledCreateServiceRequests className="create-service-request">
+    <StyledCreateServiceRequests>
       <div className="create-service-request-header">
-        <img src={Remove} alt="Remove Icon" />
-        <h2>
+        <img
+          src={Remove}
+          alt="Remove Icon"
+          className="remove-btn"
+          onClick={handleRemove}
+        />
+        <h2 className="create-service-header">
           {service ? "Edit Service Request" : "Create New Service Request"}
         </h2>
       </div>

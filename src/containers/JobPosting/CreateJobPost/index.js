@@ -71,13 +71,26 @@ const CreateJobPost = () => {
     setPrice(0);
     setDescription("");
     setDropDownLabel("select option");
+
+    navigate("/homescreen");
+  };
+
+  const handleRemove = () => {
+    navigate("/homescreen");
   };
 
   return (
     <StyledCreateJobPost className="create-job-post">
       <div className="create-job-post__header">
-        <img src={Remove} alt="" />
-        <h2>{job ? "Edit Job" : "Create new Job"}</h2>
+        <img
+          src={Remove}
+          alt=""
+          onClick={handleRemove}
+          className="remove-btn"
+        />
+        <h2 className="create-job-header">
+          {job ? "Edit Job" : "Create new Job"}
+        </h2>
       </div>
       <div className="input containers">
         <DropDown

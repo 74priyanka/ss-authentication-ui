@@ -1,40 +1,33 @@
-import React from "react";
-import { StyledSignup } from "./style";
+import React, { useState } from "react";
+import { StyledLogin } from "./style";
 import googleImg from "../../assets/google.png";
 import Buttons from "../../reusableComponents/Buttons";
 import Inputs from "../../reusableComponents/Inputs";
 import { colors } from "../../Constants/colors";
-import useSignupHandler from "./hooks/useSignupHandler";
+import useLoginHandler from "./hooks/useLoginHandler";
+
 import {
-  handleSignUp,
+  handleInputChange,
   handleForgotPassword,
   handleLogin,
-  handleInputChange,
+  handleSignUp,
 } from "./helpers";
 
-const Signup = () => {
-  const { navigate, formData, setFormData, workerMutation } =
-    useSignupHandler();
+const CustomerLogin = () => {
+  const { navigate, formData, setFormData, customerMutation } =
+    useLoginHandler();
 
   return (
-    <StyledSignup className="styled-signup">
-      <h1 className="signup-title">"Create an Account as a Worker"</h1>
-      <p className="signup-description">
-        "Start Your Journey with Us: Create Your Worker Account Today"
+    <StyledLogin className="styled-login">
+      <h1 className="welcome-title">Welcome to SkillSync</h1>{" "}
+      <p className="welcome-text">
+        "Quality Service at Your Doorstep: Book a Worker"
       </p>
-      <Inputs
-        type="text"
-        label="FullName"
-        name="userName"
-        onChange={(e) => handleInputChange(e, setFormData)}
-        labelColor={colors.input_label_text}
-        inputColor={colors.input_label_text}
-        backgroundColor={colors.input_bg}
-      />
       <Inputs
         type="text"
         label="Email"
         name="email"
+        value={formData.email}
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
@@ -44,15 +37,16 @@ const Signup = () => {
         type="Password"
         label="Password"
         name="password"
+        value={formData.password}
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
         backgroundColor={colors.input_bg}
       />
       <div className="forgot-password">
-        <label class="checkbox-container">
+        <label class="checkbox-label">
           <input type="checkbox" id="rememberMe" name="rememberMe" />
-          <span class="checkmark"></span>
+          <span class="checkbox-checkmark"></span>
           Remember Me
         </label>
 
@@ -64,10 +58,10 @@ const Signup = () => {
         </p>
       </div>
       <Buttons
-        label="SIGNUP"
+        label="LOGIN"
         labelColor={colors.primary_btn_label}
         backgroundColor={colors.primary_btn_bg}
-        onClick={() => handleSignUp(workerMutation, formData, navigate)}
+        onClick={() => handleLogin(customerMutation, formData, navigate)}
       />
       <Buttons
         imgSrc={googleImg}
@@ -75,14 +69,17 @@ const Signup = () => {
         labelColor={colors.secondary_btn_label}
         backgroundColor={colors.secondary_btn_bg}
       />
-      <p className="login-link">
+      <p className="signup-link">
         You don't have an account yet?{" "}
-        <span className="login-link-text" onClick={() => handleLogin(navigate)}>
-          Sign in
+        <span
+          className="signup-link-text"
+          onClick={() => handleSignUp(navigate)}
+        >
+          Sign up
         </span>
       </p>
-    </StyledSignup>
+    </StyledLogin>
   );
 };
 
-export default Signup;
+export default CustomerLogin;

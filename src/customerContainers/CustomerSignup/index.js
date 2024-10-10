@@ -12,15 +12,15 @@ import {
   handleInputChange,
 } from "./helpers";
 
-const Signup = () => {
-  const { navigate, formData, setFormData, workerMutation } =
+const CustomerSignup = () => {
+  const { navigate, formData, setFormData, customerMutation } =
     useSignupHandler();
 
   return (
     <StyledSignup className="styled-signup">
-      <h1 className="signup-title">"Create an Account as a Worker"</h1>
+      <h1 className="signup-title">"Create an Account as a Customer"</h1>
       <p className="signup-description">
-        "Start Your Journey with Us: Create Your Worker Account Today"
+        "Experience Quality Service: Create Your Customer Account Today"
       </p>
       <Inputs
         type="text"
@@ -67,7 +67,7 @@ const Signup = () => {
         label="SIGNUP"
         labelColor={colors.primary_btn_label}
         backgroundColor={colors.primary_btn_bg}
-        onClick={() => handleSignUp(workerMutation, formData, navigate)}
+        onClick={() => handleSignUp(customerMutation, formData, navigate)}
       />
       <Buttons
         imgSrc={googleImg}
@@ -85,4 +85,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default CustomerSignup;

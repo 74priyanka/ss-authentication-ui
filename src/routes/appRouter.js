@@ -26,6 +26,8 @@ import ShowServiceRequests from "../containers/ServiceRequests/ShowServiceReques
 
 //customer
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
+import CustomerLogin from "../customerContainers/CustomerLogin";
+import CustomerSignup from "../customerContainers/CustomerSignup";
 
 const appRouter = createBrowserRouter([
   {
@@ -41,12 +43,20 @@ const appRouter = createBrowserRouter([
         element: <LaunchScreen />,
       },
       {
-        path: "/login/:userType",
+        path: "/login/worker",
         element: <Login />,
       },
       {
-        path: "/signup/:userType",
+        path: "/signup/worker",
         element: <Signup />,
+      },
+      {
+        path: "/login/customer",
+        element: <CustomerLogin />,
+      },
+      {
+        path: "/signup/customer",
+        element: <CustomerSignup />,
       },
       {
         path: "/forgotPage",

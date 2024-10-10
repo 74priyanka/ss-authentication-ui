@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTimePicker = styled.div`
   label {
-    font-size: 24px; /* Default size */
+    font-size: 16px;
 
     /* Responsive styles */
     @media (max-width: 768px) {
@@ -23,5 +23,6 @@ export const StyledTimePicker = styled.div`
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
+    cursor: pointer;
   }
 `;

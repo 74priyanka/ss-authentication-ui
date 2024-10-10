@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { workerLogin } from "../../../api/WorkerApi";
+import { customerLogin } from "../../../api/CustomerApi";
 
 const useLoginHandler = () => {
   // Custom hook definition
@@ -14,14 +14,14 @@ const useLoginHandler = () => {
     password: "",
   });
 
-  const workerMutation = useMutation({
-    mutationFn: (credentials) => workerLogin(credentials),
+  const customerMutation = useMutation({
+    mutationFn: (credentials) => customerLogin(credentials),
     onSuccess: (data) => {
-      console.log("Worker login successful:", data);
-      navigate("/homescreen");
+      console.log("Customer login successful:", data);
+      navigate("/customer-homescreen");
     },
     onError: (error) => {
-      console.log("Worker login failed:", error);
+      console.log("Customer login failed:", error);
     },
   });
 
@@ -29,7 +29,7 @@ const useLoginHandler = () => {
     navigate,
     formData,
     setFormData,
-    workerMutation,
+    customerMutation,
   };
 };
 

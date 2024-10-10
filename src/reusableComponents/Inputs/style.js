@@ -11,7 +11,7 @@ export const StyledInputs = styled.div`
 
   .input-label {
     margin-bottom: 5px;
-    font-size: 24px;
+    font-size: 16px;
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
       font-size: 12px;

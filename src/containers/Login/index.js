@@ -14,18 +14,12 @@ import {
 } from "./helpers";
 
 const Login = () => {
-  const { navigate, formData, setFormData, mutation, userType } =
-    useLoginHandler();
+  const { navigate, formData, setFormData, workerMutation } = useLoginHandler();
 
   return (
     <StyledLogin className="styled-login">
       <h1 className="welcome-title">Welcome to SkillSync</h1>{" "}
-      {/*  will come through props */}
-      <p className="welcome-text">
-        {userType === "customer"
-          ? "Quality Service at Your Doorstep: Book a Worker"
-          : "Empower Your Skills: Join as a Worker"}
-      </p>
+      <p className="welcome-text">"Empower Your Skills: Join as a Worker"</p>
       <Inputs
         type="text"
         label="Email"
@@ -64,7 +58,7 @@ const Login = () => {
         label="LOGIN"
         labelColor={colors.primary_btn_label}
         backgroundColor={colors.primary_btn_bg}
-        onClick={() => handleLogin(mutation, formData, navigate)}
+        onClick={() => handleLogin(workerMutation, formData, navigate)}
       />
       <Buttons
         imgSrc={googleImg}
@@ -76,7 +70,7 @@ const Login = () => {
         You don't have an account yet?{" "}
         <span
           className="signup-link-text"
-          onClick={() => handleSignUp(navigate, userType)}
+          onClick={() => handleSignUp(navigate)}
         >
           Sign up
         </span>

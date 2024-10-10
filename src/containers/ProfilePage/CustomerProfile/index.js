@@ -9,7 +9,9 @@ import { fetchCustomerUserProfileData } from "../../../api/CustomerApi";
 const CustomerProfile = () => {
   // Retrieve the profile ID from session storage
   const profileData = sessionStorage.getItem("CustomerProfile"); // Assuming it's stored as a string
-  const profileId = JSON.parse(profileData).profileId;
+  console.log("profile data", profileData);
+  const profileId = JSON.parse(profileData).customerProfileId;
+  console.log("profileid ", profileId);
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profileData", profileId], // Include profileId in the query key
     queryFn: () => fetchCustomerUserProfileData(profileId), // Pass profileId to the fetch function

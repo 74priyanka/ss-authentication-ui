@@ -14,6 +14,7 @@ export const customerLogin = async (credentials) => {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    console.log("data", data);
     sessionStorage.setItem("CustomerProfile", JSON.stringify(data));
     return data;
   } catch (error) {
@@ -44,9 +45,11 @@ export const customerSignup = async (credentials) => {
 //
 export const fetchCustomerUserProfileData = async (profileId) => {
   const response = await fetch(`${API_URL}/customers/profile/${profileId}`);
+  console.log("customer-profile", response);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
+
   return response.json();
 };
 
@@ -75,17 +78,18 @@ export const fetchCustomerProfileData = async () => {
 export const createServiceRequests = async (createServiceData) => {
   try {
     const payload = {
-      name: createServiceData.name,
+      name: createServiceData.customerName,
       contact: createServiceData.contact,
-      service_requested: createServiceData.service_requested,
+      service_requested: createServiceData.serviceCategory,
       description: createServiceData.description,
-      requestedDate: createServiceData.requestedDate,
-      requestedTime: createServiceData.requestedTime,
+      requestedDate: createServiceData.dateRequested,
+      requestedTime: createServiceData.timeRequested,
       address: createServiceData.address,
-      estimatedDuration: createServiceData.estimatedDuration,
+      estimatedDuration: createServiceData.duration,
       price: createServiceData.price,
       status: "Pending",
     };
+    console.log("create service", createServiceData);
 
     console.log("payload ....", payload);
     const response = await fetch(`${API_URL}/customers/createServiceRequests`, {
@@ -95,10 +99,12 @@ export const createServiceRequests = async (createServiceData) => {
       },
       body: JSON.stringify(payload),
     });
+
     if (!response.ok) {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    console.log("service data", data);
     return data;
   } catch (error) {
     console.error("Error creating service request:", error);

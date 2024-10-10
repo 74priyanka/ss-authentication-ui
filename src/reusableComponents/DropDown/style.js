@@ -4,7 +4,7 @@ export const StyledDropDown = styled.div`
   position: relative;
   width: 100%;
   label {
-    font-size: 24px; /* Default size */
+    font-size: 16px;
     display: block;
     margin-bottom: 8px;
     color: ${({ labelColor }) => labelColor || "#000"};
@@ -27,6 +27,7 @@ export const StyledDropDown = styled.div`
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
+    cursor: pointer;
   }
   .drop-down-wrapper {
     position: relative;
@@ -53,6 +54,7 @@ export const StyledDropDown = styled.div`
     transform: translateY(-50%);
     pointer-events: none;
     font-size: 18px;
+    cursor: pointer;
   }
 
   .drop-down-menu {

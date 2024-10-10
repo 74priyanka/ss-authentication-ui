@@ -6,15 +6,16 @@ export const handleInputChange = (e, setFormData) => {
   }));
 };
 
-export const handleLogin = (workerMutation, formData, navigate) => {
-  workerMutation.mutate(formData);
-  navigate("/homescreen");
+export const handleSignUp = (customerMutation, formData, navigate) => {
+  customerMutation.mutate(formData);
+
+  navigate("/customer-homescreen");
 };
 
 export const handleForgotPassword = (navigate) => {
   navigate("/forgotPage");
 };
 
-export const handleSignUp = (navigate) => {
-  navigate("/signup/worker");
+export const handleLogin = (navigate) => {
+  navigate("/login/customer");
 };

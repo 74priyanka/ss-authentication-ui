@@ -5,8 +5,7 @@ import {
   REM_SIZES,
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
-
-export const StyledHomeScreen = styled.div`
+export const StyledCustomerHomeScreen = styled.div`
   background-color: ${colors.secondary};
   width: 100vw; /* Full viewport width */
   height: 100%;

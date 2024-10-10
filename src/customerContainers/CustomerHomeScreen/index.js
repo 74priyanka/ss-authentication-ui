@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledHomeScreen } from "./style";
+import { StyledCustomerHomeScreen } from "./style";
 import profilePic from "../../assets/profilePic.png";
 import Buttons from "../../reusableComponents/Buttons";
 import { colors } from "../../Constants/colors";
@@ -9,9 +9,12 @@ import Home from "../../assets/Home.png";
 import Chat from "../../assets/Chat.png";
 import { useNavigate } from "react-router-dom";
 
-const HomeScreen = () => {
+const CustomerHomeScreen = () => {
   const navigate = useNavigate();
 
+  const handleJobCard = () => {
+    navigate("/showJobPost");
+  };
   const handleAddJob = () => {
     navigate("/createJobPost");
   };
@@ -20,31 +23,19 @@ const HomeScreen = () => {
     navigate("/showJobPost");
   };
 
-  const handleProfile = () => {
-    navigate("/workerProfile");
-  };
-
-  const handleHome = () => {
-    navigate("/homescreen");
-  };
-
   return (
-    <StyledHomeScreen className="home-screen">
+    <StyledCustomerHomeScreen className="home-screen">
       <header className="header">
+        <h1>Welcome to customer screen</h1>
         <h1 className="title">
           Welcome <span>Priyanka Chauhan</span>
         </h1>
-        <img
-          src={profilePic}
-          alt=""
-          className="profile-pic"
-          onClick={handleProfile}
-        />
+        <img src={profilePic} alt="" className="profile-pic" />
       </header>
 
       <div className="promotion">
-        <p className="discount">"Find your dream job now "</p>
-        <p className="promotion-description">5 lakh+ jobs for you to explore</p>
+        <p className="discount">"Find services at your doorstep"</p>
+        <p className="promotion-description">Services to explore</p>
       </div>
       <h3 className="job-finding-title">Find Your Job</h3>
       <div className="job-cards">
@@ -52,7 +43,7 @@ const HomeScreen = () => {
           <img src={jobHunt} alt="" className="job-hunt-image" />
           <p>Remote Job</p>
         </div>
-        <div className="job-card-2" onClick={handleJobs}>
+        <div className="job-card-2" onClick={handleJobCard}>
           <p>JOB POSTED</p>
           <p>BY ME</p>
         </div>
@@ -61,14 +52,20 @@ const HomeScreen = () => {
           <p>Part Time</p>
         </div>
       </div>
+      <h3 className="recent-jobs">Recent Job List</h3>
+      <h3 onClick={handleJobs}>Show Job List</h3>
+      {/* <div className="job-list">
+        <img src="" alt="" />
+        <h3>Electrician</h3>
+      </div> */}
 
       <div className="nav-items-list">
-        <img src={Home} alt="" onClick={handleHome} />
+        <img src={Home} alt="" />
         <img src={Add} alt="" onClick={handleAddJob} />
         <img src={Chat} alt="" />
       </div>
-    </StyledHomeScreen>
+    </StyledCustomerHomeScreen>
   );
 };
 
-export default HomeScreen;
+export default CustomerHomeScreen;

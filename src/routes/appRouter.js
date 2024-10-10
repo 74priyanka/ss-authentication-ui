@@ -24,6 +24,9 @@ import ShowJobPost from "../containers/JobPosting/ShowJobPost";
 import CreateServiceRequests from "../containers/ServiceRequests/CreateServiceRequests";
 import ShowServiceRequests from "../containers/ServiceRequests/ShowServiceRequests";
 
+//customer
+import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -60,6 +63,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/homescreen",
         element: <HomeScreen />,
+      },
+      {
+        path: "/customer-homescreen",
+        element: <CustomerHomeScreen />,
       },
       {
         path: "/workerProfile",

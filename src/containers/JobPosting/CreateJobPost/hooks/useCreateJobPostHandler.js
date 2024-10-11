@@ -9,7 +9,7 @@ export const useCreateJobPostHandler = () => {
   const jobPostMutation = useMutation({
     mutationFn: (createJobData) => createJobPost(createJobData),
     onSuccess: (data) => {
-      console.log("jobpost created", data);
+      console.log("Job post created successfully:", data);
       navigate("/showJobPost");
     },
     onError: (error) => {

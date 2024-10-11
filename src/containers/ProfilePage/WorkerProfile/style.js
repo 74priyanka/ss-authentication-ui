@@ -12,4 +12,8 @@ export const StyledWorkerProfile = styled.div`
     color: white;
     background: linear-gradient(to left, #130160, #36353c);
   }
+
+  .logout-section {
+    display: flex;
+  }
 `;

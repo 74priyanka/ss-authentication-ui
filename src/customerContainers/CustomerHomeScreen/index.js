@@ -8,6 +8,7 @@ import Add from "../../assets/Add.png";
 import Home from "../../assets/Home.png";
 import Chat from "../../assets/Chat.png";
 import { useNavigate } from "react-router-dom";
+import ShowAllJobPost from "../../containers/JobPosting/ShowAllJobPosts";
 
 const CustomerHomeScreen = () => {
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ const CustomerHomeScreen = () => {
         <img src={Add} alt="" onClick={handleAddJob} />
         <img src={Chat} alt="" />
       </div>
+      <ShowAllJobPost />
     </StyledCustomerHomeScreen>
   );
 };

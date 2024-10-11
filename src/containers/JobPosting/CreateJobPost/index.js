@@ -38,12 +38,22 @@ const CreateJobPost = () => {
 
   const handleSave = async () => {
     console.log("save button clicked");
+
+    //get profileId from sessionStorage
+    const profile = JSON.parse(sessionStorage.getItem("profile"));
+
+    if (!profile || !profile.profileId) {
+      console.error("User not logged in or profileId missing");
+      return;
+    }
+
     const dataSendToBackend = {
       date: date,
       time: time,
       description: description,
       dropDownLabel: dropDownLabel,
       price: price,
+      userId: profile.profileId, //include userId from sessionStorage
     };
 
     try {

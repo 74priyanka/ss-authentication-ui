@@ -40,8 +40,19 @@ const CreateServiceRequests = () => {
   const updateServiceRequestsMutation = useUpdateServiceRequestsHandler();
 
   const handleSave = async () => {
+    //get customerProfileId from sessionStorage
+    const CustomerProfile = JSON.parse(
+      sessionStorage.getItem("CustomerProfile")
+    );
+    const customerProfileId = CustomerProfile.customerProfileId;
+
+    if (!CustomerProfile || !customerProfileId) {
+      throw new Error("Customer Profile not found");
+    }
+
     // Map state variables to backend keys
     const dataSendToBackend = {
+      userId: customerProfileId,
       customerName: name,
       contact: contact,
       serviceCategory: serviceCategory,

@@ -22,6 +22,32 @@ export const customerLogin = async (credentials) => {
   }
 };
 
+//function to handle customer logout
+export const customerLogout = async () => {
+  try {
+    const token = sessionStorage.getItem("CustomerProfile")
+      ? JSON.parse(sessionStorage.getItem("CustomerProfile")).token
+      : null;
+    const response = await fetch(`${API_URL}/customers/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    //clear the session storage
+    sessionStorage.removeItem("CustomerProfile");
+    return true;
+  } catch (error) {
+    console.error("Logout failed : ", error);
+    return false;
+  }
+};
+
 // Function to handle customer signup
 export const customerSignup = async (credentials) => {
   try {
@@ -77,7 +103,18 @@ export const fetchCustomerProfileData = async () => {
 
 export const createServiceRequests = async (createServiceData) => {
   try {
+    //get the customer's customerProfileId from sessionStorage
+    const CustomerProfile = JSON.parse(
+      sessionStorage.getItem("CustomerProfile")
+    );
+    const customerProfileId = CustomerProfile.customerProfileId;
+
+    if (!CustomerProfile || !customerProfileId) {
+      throw new Error("Customer Profile not found");
+    }
+
     const payload = {
+      userId: customerProfileId,
       name: createServiceData.customerName,
       contact: createServiceData.contact,
       service_requested: createServiceData.serviceCategory,
@@ -129,6 +166,29 @@ export const getServiceRequests = async () => {
     return data;
   } catch (error) {
     console.error("Error fetching service requests:", error);
+    throw error;
+  }
+};
+
+//fetching service requests created by particular customer
+export const getServiceRequestsByCustomer = async (userId) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/customers/getServiceRequestsByCustomer/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching job listings by worker:", error);
     throw error;
   }
 };

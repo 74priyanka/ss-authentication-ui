@@ -32,6 +32,33 @@ export const fetchWorkerUserProfileData = async (profileId) => {
   return response.json();
 };
 
+//function to handle worker logout
+export const workerLogout = async () => {
+  try {
+    const token = sessionStorage.getItem("profile")
+      ? JSON.parse(sessionStorage.getItem("profile")).token
+      : null;
+    const response = await fetch(`${API_URL}/workers/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    //clear the session storage
+    sessionStorage.removeItem("profile");
+
+    return true;
+  } catch (error) {
+    console.error("Logout failed: ", error);
+    return false;
+  }
+};
+
 // Function to handle worker signup
 export const workerSignup = async (credentials) => {
   try {
@@ -76,12 +103,21 @@ export const fetchWorkerProfileData = async () => {
 
 export const createJobPost = async (createJobData) => {
   try {
+    //get the worker's profileId from sessionStorage
+    const profile = JSON.parse(sessionStorage.getItem("profile"));
+
+    if (!profile || !profile.profileId) {
+      throw new Error("worker is not logged in");
+    }
+
+    //prepare the payload for creatingJobListing including the profileId as userId
     const payload = {
       category: createJobData.dropDownLabel,
       service_availability_duration: createJobData.time,
       date: createJobData.date,
       price: createJobData.price,
       job_description: createJobData.description,
+      userId: profile.profileId, //from sessionStorage
       status: "Pending",
     };
 
@@ -96,6 +132,7 @@ export const createJobPost = async (createJobData) => {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    console.log("Job post created successfully:", data);
     return data;
   } catch (error) {
     console.error("Error creating job post:", error);
@@ -118,6 +155,29 @@ export const getJobListings = async () => {
     return data;
   } catch (error) {
     console.error("Error fetching job listings:", error);
+    throw error;
+  }
+};
+
+//fetching job listings created by a specific worker
+export const getJobListingsByWorker = async (userId) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/workers/getJobListingByWorker/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching job listings by worker:", error);
     throw error;
   }
 };

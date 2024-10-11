@@ -3,34 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import JobCard from "../../../reusableComponents/JobCard";
 import { StyledShowJobPost } from "./style";
-// import { getJobListings } from "../../../api/WorkerApi";
-import { getJobListingsByWorker } from "../../../api/WorkerApi";
+import { getJobListings } from "../../../api/WorkerApi";
 
-const ShowJobPost = () => {
+const ShowAllJobPost = () => {
   const navigate = useNavigate();
 
-  // Get the worker's profileId from sessionStorage (this is the userId)
-
-  const profile = JSON.parse(sessionStorage.getItem("profile"));
   const handleCreate = () => {
     navigate("/createJobPost");
   };
-  // const {
-  //   data: jobListings,
-  //   error,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["jobListings"],
-  //   queryFn: getJobListings,
-  // });
-
   const {
     data: jobListings,
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["jobListingsByWorker", profile.profileId], // Include userId as part of the query key
-    queryFn: () => getJobListingsByWorker(profile.profileId), // Fetch job posts by this worker
+    queryKey: ["jobListings"],
+    queryFn: getJobListings,
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -38,17 +25,17 @@ const ShowJobPost = () => {
 
   return (
     <StyledShowJobPost>
-      <h1>Job Postings</h1>
+      <h1>Job Postings By Workers</h1>
       <div className="job-card-container">
         {jobListings.map((job) => (
           <JobCard key={job._id} job={job} />
         ))}
       </div>
-      <div className="button-container">
+      {/* <div className="button-container">
         <button onClick={handleCreate}>+</button>
-      </div>
+      </div> */}
     </StyledShowJobPost>
   );
 };
 
-export default ShowJobPost;
+export default ShowAllJobPost;

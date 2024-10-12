@@ -15,5 +15,10 @@ export const StyledWorkerProfile = styled.div`
 
   .logout-section {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .logout-section > img {
+    cursor: pointer;
   }
 `;

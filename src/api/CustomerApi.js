@@ -124,7 +124,7 @@ export const createServiceRequests = async (createServiceData) => {
       address: createServiceData.address,
       estimatedDuration: createServiceData.duration,
       price: createServiceData.price,
-      status: "Pending",
+      status: createServiceData.status,
     };
     console.log("create service", createServiceData);
 
@@ -206,6 +206,7 @@ export const updateServiceRequests = async (id, updateServiceData) => {
       address: updateServiceData.address,
       estimatedDuration: updateServiceData.duration,
       price: updateServiceData.price,
+      status: updateServiceData.status,
     };
     console.log("Payload sent to API:", payload);
 

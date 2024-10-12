@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import ServiceRequestsCard from "../../../reusableComponents/ServiceRequestsCard";
 import { StyledShowServiceRequests } from "./style";
-// import { getServiceRequests } from "../../../api/CustomerApi";
 import { getServiceRequestsByCustomer } from "../../../api/CustomerApi";
+import profilePic from "../../../assets/profilePic.png";
 
 const ShowServiceRequests = () => {
   const navigate = useNavigate();
@@ -14,14 +14,10 @@ const ShowServiceRequests = () => {
   const handleCreate = () => {
     navigate("/createServiceRequests");
   };
-  // const {
-  //   data: serviceRequests,
-  //   error,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["serviceRequests"],
-  //   queryFn: getServiceRequests,
-  // });
+
+  const handleProfile = () => {
+    navigate("/workerProfile");
+  };
 
   const {
     data: serviceRequests,
@@ -39,7 +35,16 @@ const ShowServiceRequests = () => {
   if (error) return <p>Error loading job listings: {error.message}</p>;
 
   return (
-    <StyledShowServiceRequests className="container">
+    <StyledShowServiceRequests>
+      <div className="show-serviceRequest-header">
+        <h1>Service Requests</h1>
+        <img
+          src={profilePic}
+          alt=""
+          className="profile-pic"
+          onClick={handleProfile}
+        />
+      </div>
       <h1>Service Requests</h1>
       <div className="service-card-container">
         {serviceRequests?.data.map((service) => (

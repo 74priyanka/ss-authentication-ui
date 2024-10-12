@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Buttons from "../../../reusableComponents/Buttons";
 import { colors } from "../../../Constants/colors";
 import { customerLogout } from "../../../api/CustomerApi";
+import homescreen from "../../../assets/homescreen.png";
 
 const CustomerProfile = () => {
   const navigate = useNavigate();
@@ -37,6 +38,11 @@ const CustomerProfile = () => {
       console.error("Logout failed.Please try again");
     }
   };
+
+  const handleHome = () => {
+    navigate("/homescreen");
+  };
+
   return (
     <StyledCustomerProfile>
       <div className="profile-page__header">
@@ -48,6 +54,7 @@ const CustomerProfile = () => {
             backgroundColor={colors.secondary_btn_bg}
             onClick={handleLogout}
           />
+          <img src={homescreen} alt="" onClick={handleHome} />
         </div>
 
         <p className="profile-name">{profileName}</p>

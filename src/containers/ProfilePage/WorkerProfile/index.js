@@ -9,6 +9,7 @@ import Buttons from "../../../reusableComponents/Buttons";
 import { colors } from "../../../Constants/colors";
 import { useNavigate } from "react-router-dom";
 import { workerLogout } from "../../../api/WorkerApi";
+import homescreen from "../../../assets/homescreen.png";
 
 const WorkerProfile = () => {
   const navigate = useNavigate();
@@ -36,6 +37,10 @@ const WorkerProfile = () => {
     }
   };
 
+  const handleHome = () => {
+    navigate("/homescreen");
+  };
+
   return (
     <StyledWorkerProfile>
       <div className="profile-page__header">
@@ -47,6 +52,7 @@ const WorkerProfile = () => {
             backgroundColor={colors.secondary_btn_bg}
             onClick={handleLogout}
           />
+          <img src={homescreen} alt="" onClick={handleHome} />
         </div>
 
         <p className="profile-name">{profileName}</p>

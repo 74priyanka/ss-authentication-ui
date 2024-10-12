@@ -55,6 +55,9 @@ export const StyledCreateServiceRequests = styled.div`
     }
   }
 
+  .profile-pic {
+    cursor: pointer;
+  }
   .input {
     display: flex;
     flex-direction: column;
@@ -80,6 +83,18 @@ export const StyledCreateServiceRequests = styled.div`
         font-size: 16px;
       }
     }
+  }
+
+  .status-option {
+    background-color: ${colors.input_bg};
+    color: ${colors.input_label_text};
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
   }
 
   .button-container {

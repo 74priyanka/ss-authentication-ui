@@ -8,9 +8,6 @@ import { getServiceRequests } from "../../../api/CustomerApi";
 const ShowAllServiceRequests = () => {
   const navigate = useNavigate();
 
-  const handleCreate = () => {
-    navigate("/createServiceRequests");
-  };
   const {
     data: serviceRequests,
     error,
@@ -21,6 +18,10 @@ const ShowAllServiceRequests = () => {
   });
 
   console.log("service requests", serviceRequests?.data);
+  // Filter service requests to only include those with status "Pending"
+  const pendingRequests = serviceRequests?.data.filter(
+    (service) => service.status === "Pending"
+  );
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading job listings: {error.message}</p>;
@@ -29,9 +30,13 @@ const ShowAllServiceRequests = () => {
     <StyledShowServiceRequests className="container">
       <h1>Service Requests By Customers</h1>
       <div className="service-card-container">
-        {serviceRequests?.data.map((service) => (
-          <ServiceRequestsCard key={service._id} service={service} />
-        ))}
+        {pendingRequests.length > 0 ? (
+          pendingRequests.map((service) => (
+            <ServiceRequestsCard key={service._id} service={service} />
+          ))
+        ) : (
+          <p>No pending service requests found</p>
+        )}
       </div>
     </StyledShowServiceRequests>
   );

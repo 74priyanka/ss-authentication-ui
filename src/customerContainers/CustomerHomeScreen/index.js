@@ -50,8 +50,8 @@ const CustomerHomeScreen = () => {
           <p>Remote Job</p>
         </div>
         <div className="job-card-2" onClick={handleJobCard}>
-          <p>JOB POSTED</p>
-          <p>BY ME</p>
+          <p>SERVICE REQUESTS</p>
+          <p>POSTED BY ME</p>
         </div>
         <div className="job-card-3">
           <p>37.1kk</p>

@@ -10,6 +10,7 @@ import DatePicker from "../../../reusableComponents/DatePicker";
 import { useCreateJobPostHandler } from "./hooks/useCreateJobPostHandler";
 import { useUpdateJobPostHandler } from "../ShowJobPost/hooks/useUpdateJobPostHandler";
 import { useNavigate, useLocation } from "react-router-dom";
+import profilePic from "../../../assets/profilePic.png";
 
 const CreateJobPost = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const CreateJobPost = () => {
   const [price, setPrice] = useState(job?.price || 0);
   const [description, setDescription] = useState(job?.job_description || "");
 
+  const [status, setStatus] = useState(job?.status || "Pending");
+
   const jobPostMutation = useCreateJobPostHandler();
   const updateJobPostMutation = useUpdateJobPostHandler();
 
@@ -34,6 +37,13 @@ const CreateJobPost = () => {
 
   const handleDescription = (event) => {
     setDescription(event.target.value);
+  };
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+  const handleProfile = () => {
+    navigate("/workerProfile");
   };
 
   const handleSave = async () => {
@@ -54,6 +64,7 @@ const CreateJobPost = () => {
       dropDownLabel: dropDownLabel,
       price: price,
       userId: profile.profileId, //include userId from sessionStorage
+      status: status,
     };
 
     try {
@@ -81,6 +92,7 @@ const CreateJobPost = () => {
     setPrice(0);
     setDescription("");
     setDropDownLabel("select option");
+    setStatus("Pending");
 
     navigate("/homescreen");
   };
@@ -101,6 +113,12 @@ const CreateJobPost = () => {
         <h2 className="create-job-header">
           {job ? "Edit Job" : "Create new Job"}
         </h2>
+        <img
+          src={profilePic}
+          alt=""
+          className="profile-pic"
+          onClick={handleProfile}
+        />
       </div>
       <div className="input containers">
         <DropDown
@@ -128,6 +146,19 @@ const CreateJobPost = () => {
           onChange={handleDescription}
           value={description}
         ></textarea>
+        <label htmlFor="status" style={{ color: colors.input_label_text }}>
+          Job Status:
+        </label>
+        <select
+          className="status-option"
+          id="status"
+          value={status}
+          onChange={handleStatusChange}
+        >
+          <option value="Pending">Pending</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Approved">Approved</option>
+        </select>
       </div>
       <div className="button-container">
         <Buttons

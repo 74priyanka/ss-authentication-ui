@@ -8,9 +8,6 @@ import { getJobListings } from "../../../api/WorkerApi";
 const ShowAllJobPost = () => {
   const navigate = useNavigate();
 
-  const handleCreate = () => {
-    navigate("/createJobPost");
-  };
   const {
     data: jobListings,
     error,
@@ -23,17 +20,21 @@ const ShowAllJobPost = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading job listings: {error.message}</p>;
 
+  // Filter the job listings to show only those with status "Pending"
+  const pendingJobListings = jobListings?.filter(
+    (job) => job.status === "Pending"
+  );
+
   return (
     <StyledShowJobPost>
       <h1>Job Postings By Workers</h1>
       <div className="job-card-container">
-        {jobListings.map((job) => (
-          <JobCard key={job._id} job={job} />
-        ))}
+        {pendingJobListings.length > 0 ? (
+          pendingJobListings.map((job) => <JobCard key={job._id} job={job} />)
+        ) : (
+          <p>No pending job listings found</p>
+        )}
       </div>
-      {/* <div className="button-container">
-        <button onClick={handleCreate}>+</button>
-      </div> */}
     </StyledShowJobPost>
   );
 };

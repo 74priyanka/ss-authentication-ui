@@ -12,6 +12,11 @@ export const StyledShowJobPost = styled.div`
     text-align: center;
   }
 
+  .show-jobpost-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   /* Job card container */
   .job-card-container {
     width: 100%;
@@ -42,6 +47,10 @@ export const StyledShowJobPost = styled.div`
     .job-card-container {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .profile-pic {
+    cursor: pointer;
   }
 
   /* Fixed button styling */

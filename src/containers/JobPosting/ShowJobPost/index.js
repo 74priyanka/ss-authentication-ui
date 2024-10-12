@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import JobCard from "../../../reusableComponents/JobCard";
 import { StyledShowJobPost } from "./style";
-// import { getJobListings } from "../../../api/WorkerApi";
 import { getJobListingsByWorker } from "../../../api/WorkerApi";
+import profilePic from "../../../assets/profilePic.png";
 
 const ShowJobPost = () => {
   const navigate = useNavigate();
@@ -15,14 +15,6 @@ const ShowJobPost = () => {
   const handleCreate = () => {
     navigate("/createJobPost");
   };
-  // const {
-  //   data: jobListings,
-  //   error,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["jobListings"],
-  //   queryFn: getJobListings,
-  // });
 
   const {
     data: jobListings,
@@ -36,9 +28,22 @@ const ShowJobPost = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading job listings: {error.message}</p>;
 
+  const handleProfile = () => {
+    navigate("/workerProfile");
+  };
+
   return (
     <StyledShowJobPost>
-      <h1>Job Postings</h1>
+      <div className="show-jobpost-header">
+        <h1>Job Postings</h1>
+        <img
+          src={profilePic}
+          alt=""
+          className="profile-pic"
+          onClick={handleProfile}
+        />
+      </div>
+
       <div className="job-card-container">
         {jobListings.map((job) => (
           <JobCard key={job._id} job={job} />

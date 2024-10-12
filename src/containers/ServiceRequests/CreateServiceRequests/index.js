@@ -10,6 +10,7 @@ import DatePicker from "../../../reusableComponents/DatePicker";
 import { useCreateServiceRequestsHandler } from "./hooks/useCreateServiceRequestsHandler";
 import { useUpdateServiceRequestsHandler } from "../ShowServiceRequests/hooks/useUpdateServiceRequestsHandler";
 import { useNavigate, useLocation } from "react-router-dom";
+import profilePic from "../../../assets/profilePic.png";
 
 const CreateServiceRequests = () => {
   const navigate = useNavigate();
@@ -34,10 +35,15 @@ const CreateServiceRequests = () => {
     service?.estimatedDuration || "00:00"
   );
   const [price, setPrice] = useState(service?.price || 0);
+  const [status, setStatus] = useState(service?.status || "Pending");
 
   // Mutation hooks
   const serviceRequestsMutation = useCreateServiceRequestsHandler();
   const updateServiceRequestsMutation = useUpdateServiceRequestsHandler();
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
 
   const handleSave = async () => {
     //get customerProfileId from sessionStorage
@@ -62,6 +68,7 @@ const CreateServiceRequests = () => {
       address: address,
       duration: duration,
       price: price,
+      status: status,
     };
 
     try {
@@ -91,12 +98,16 @@ const CreateServiceRequests = () => {
     setAddress("");
     setDuration("00:00");
     setPrice(0);
+    setStatus("Pending");
 
     navigate("/customer-homescreen");
   };
 
   const handleRemove = () => {
     navigate("/customer-homescreen");
+  };
+  const handleProfile = () => {
+    navigate("/workerProfile");
   };
 
   return (
@@ -111,6 +122,12 @@ const CreateServiceRequests = () => {
         <h2 className="create-service-header">
           {service ? "Edit Service Request" : "Create New Service Request"}
         </h2>
+        <img
+          src={profilePic}
+          alt=""
+          className="profile-pic"
+          onClick={handleProfile}
+        />
       </div>
       <div className="input containers">
         <Inputs
@@ -177,6 +194,19 @@ const CreateServiceRequests = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
+        <label htmlFor="status" style={{ color: colors.input_label_text }}>
+          Job Status:
+        </label>
+        <select
+          className="status-option"
+          id="status"
+          value={status}
+          onChange={handleStatusChange}
+        >
+          <option value="Pending">Pending</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Approved">Approved</option>
+        </select>
       </div>
       <div className="button-container">
         <Buttons

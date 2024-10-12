@@ -118,7 +118,7 @@ export const createJobPost = async (createJobData) => {
       price: createJobData.price,
       job_description: createJobData.description,
       userId: profile.profileId, //from sessionStorage
-      status: "Pending",
+      status: createJobData.status,
     };
 
     const response = await fetch(`${API_URL}/workers/createJobListing`, {
@@ -190,6 +190,7 @@ export const updateJobListings = async (id, updateJobData) => {
       date: updateJobData.date,
       price: updateJobData.price,
       job_description: updateJobData.description,
+      status: updateJobData.status,
     };
     console.log("Payload sent to API:", payload);
 

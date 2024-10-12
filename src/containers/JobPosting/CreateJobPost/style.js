@@ -36,6 +36,10 @@ export const StyledCreateJobPost = styled.div`
     }
   }
 
+  .profile-pic {
+    cursor: pointer;
+  }
+
   textarea {
     padding: 12px;
     border: none;
@@ -67,6 +71,18 @@ export const StyledCreateJobPost = styled.div`
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.DESKTOP)} {
       gap: 20px;
     }
+  }
+
+  .status-option {
+    background-color: ${colors.input_bg};
+    color: ${colors.input_label_text};
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
   }
 
   .remove-btn {

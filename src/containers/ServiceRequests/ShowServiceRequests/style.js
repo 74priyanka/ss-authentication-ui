@@ -13,6 +13,12 @@ export const StyledShowServiceRequests = styled.div`
     margin-bottom: 20px;
   }
 
+  .show-serviceRequest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   /* Service card container - responsive grid layout */
   .service-card-container {
     display: grid;

@@ -16,7 +16,7 @@ const ShowServiceRequests = () => {
   };
 
   const handleProfile = () => {
-    navigate("/workerProfile");
+    navigate("/customerProfile");
   };
 
   const {

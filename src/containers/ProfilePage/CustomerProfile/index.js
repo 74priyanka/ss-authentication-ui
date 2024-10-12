@@ -40,7 +40,7 @@ const CustomerProfile = () => {
   };
 
   const handleHome = () => {
-    navigate("/homescreen");
+    navigate("/customer-homescreen");
   };
 
   return (

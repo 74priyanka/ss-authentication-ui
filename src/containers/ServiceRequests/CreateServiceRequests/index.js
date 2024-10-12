@@ -107,7 +107,7 @@ const CreateServiceRequests = () => {
     navigate("/customer-homescreen");
   };
   const handleProfile = () => {
-    navigate("/workerProfile");
+    navigate("/customerProfile");
   };
 
   return (

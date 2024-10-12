@@ -13,6 +13,10 @@ export const StyledShowServiceRequests = styled.div`
     margin-bottom: 20px;
   }
 
+  .profile-pic {
+    cursor: pointer;
+  }
+
   .show-serviceRequest-header {
     display: flex;
     justify-content: space-between;

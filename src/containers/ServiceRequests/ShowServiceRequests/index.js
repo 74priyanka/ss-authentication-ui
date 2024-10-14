@@ -48,7 +48,11 @@ const ShowServiceRequests = () => {
       <h1>Service Requests</h1>
       <div className="service-card-container">
         {serviceRequests?.data.map((service) => (
-          <ServiceRequestsCard key={service._id} service={service} />
+          <ServiceRequestsCard
+            key={service._id}
+            service={service}
+            isShowServiceRequest={true}
+          />
         ))}
       </div>
       <div className="button-container">

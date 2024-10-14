@@ -30,7 +30,9 @@ const ShowAllJobPost = () => {
       <h1>Job Postings By Workers</h1>
       <div className="job-card-container">
         {pendingJobListings.length > 0 ? (
-          pendingJobListings.map((job) => <JobCard key={job._id} job={job} />)
+          pendingJobListings.map((job) => (
+            <JobCard key={job._id} job={job} isShowJobPosting={false} />
+          ))
         ) : (
           <p>No pending job listings found</p>
         )}

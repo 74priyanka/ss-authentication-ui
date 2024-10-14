@@ -16,6 +16,9 @@ const CreateJobPost = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const job = location.state?.job;
+
+  const [name, setName] = useState(job?.name || "");
+
   const [dropDownLabel, setDropDownLabel] = useState(
     job?.category || "select option"
   );
@@ -23,6 +26,8 @@ const CreateJobPost = () => {
     job?.service_availability_duration || "00:00"
   );
   const [date, setDate] = useState(job?.date || "yyyy-mm-dd");
+  const [contact, setContact] = useState(job?.contact || "");
+
   const [price, setPrice] = useState(job?.price || 0);
   const [description, setDescription] = useState(job?.job_description || "");
 
@@ -58,10 +63,12 @@ const CreateJobPost = () => {
     }
 
     const dataSendToBackend = {
+      name: name,
       date: date,
       time: time,
       description: description,
       dropDownLabel: dropDownLabel,
+      contact: contact,
       price: price,
       userId: profile.profileId, //include userId from sessionStorage
       status: status,
@@ -87,8 +94,10 @@ const CreateJobPost = () => {
 
   const handleCancel = () => {
     console.log("cancel button clicked");
+    setName("");
     setTime("00:00");
     setDate("yyyy-mm-dd");
+    setContact("");
     setPrice(0);
     setDescription("");
     setDropDownLabel("select option");
@@ -121,6 +130,14 @@ const CreateJobPost = () => {
         />
       </div>
       <div className="input containers">
+        <Inputs
+          label="Worker Name"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          labelColor={colors.input_label_text}
+          backgroundColor={colors.input_bg}
+        />
         <DropDown
           name="Job Categories"
           dropDownLabel={dropDownLabel}
@@ -128,6 +145,15 @@ const CreateJobPost = () => {
         />
         <TimePicker setTime={setTime} time={time} />
         <DatePicker setDate={setDate} date={date} />
+        <Inputs
+          label="Contact"
+          name="contact"
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          labelColor={colors.input_label_text}
+          backgroundColor={colors.input_bg}
+        />
+
         <Inputs
           type="number"
           label="Price"

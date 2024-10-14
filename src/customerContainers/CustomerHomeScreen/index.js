@@ -13,6 +13,19 @@ import ShowAllJobPost from "../../containers/JobPosting/ShowAllJobPosts";
 const CustomerHomeScreen = () => {
   const navigate = useNavigate();
 
+  // Retrieve CustomerProfile from sessionStorage
+  const customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  // Extract customerId from customerProfile
+  const customerId = customerProfile?.customerProfileId;
+
+  const handleActionsRequired = () => {
+    if (customerId) {
+      navigate("/actionByCustomer", { state: { customerId } }); // Pass customerId using state
+    } else {
+      console.error("Customer ID not found.");
+    }
+  };
+
   const handleJobCard = () => {
     navigate("/showServiceRequests");
   };
@@ -57,6 +70,9 @@ const CustomerHomeScreen = () => {
           <p>37.1kk</p>
           <p>Part Time</p>
         </div>
+        <button onClick={handleActionsRequired}>
+          show action required posts
+        </button>
       </div>
 
       <div className="nav-items-list">

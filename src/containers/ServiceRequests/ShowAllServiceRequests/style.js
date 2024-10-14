@@ -86,4 +86,10 @@ export const StyledShowServiceRequests = styled.div`
       padding: 8px;
     }
   }
+
+  .accept-reject {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;

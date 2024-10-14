@@ -23,6 +23,8 @@ import CreateJobPost from "../containers/JobPosting/CreateJobPost";
 import ShowJobPost from "../containers/JobPosting/ShowJobPost";
 import CreateServiceRequests from "../containers/ServiceRequests/CreateServiceRequests";
 import ShowServiceRequests from "../containers/ServiceRequests/ShowServiceRequests";
+import ActionRequiredByCustomer from "../customerContainers/ActionRequiredByCustomer";
+import ActionRequiredByWorker from "../containers/ActionRequiredByWorker";
 
 //customer
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
@@ -137,6 +139,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/showServiceRequests",
         element: <ShowServiceRequests />,
+      },
+      {
+        path: "/actionByCustomer",
+        element: <ActionRequiredByCustomer />,
+      },
+      {
+        path: "/actionByWorker",
+        element: <ActionRequiredByWorker />,
       },
     ],
     errorElement: <Error />,

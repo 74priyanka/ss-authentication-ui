@@ -32,7 +32,11 @@ const ShowAllServiceRequests = () => {
       <div className="service-card-container">
         {pendingRequests.length > 0 ? (
           pendingRequests.map((service) => (
-            <ServiceRequestsCard key={service._id} service={service} />
+            <ServiceRequestsCard
+              key={service._id}
+              service={service}
+              isShowServiceRequest={false}
+            />
           ))
         ) : (
           <p>No pending service requests found</p>

@@ -13,6 +13,19 @@ import ShowAllServiceRequests from "../ServiceRequests/ShowAllServiceRequests";
 const HomeScreen = () => {
   const navigate = useNavigate();
 
+  // Retrieve workerProfile from sessionStorage
+  const workerProfile = JSON.parse(sessionStorage.getItem("profile"));
+  // Extract customerId from customerProfile
+  const workerId = workerProfile?.profileId;
+
+  const handleActionsRequired = () => {
+    if (workerId) {
+      navigate("/actionByWorker", { state: { workerId } }); // Pass workerId using state
+    } else {
+      console.error("worker ID not found.");
+    }
+  };
+
   const handleAddJob = () => {
     navigate("/createJobPost");
   };
@@ -61,6 +74,9 @@ const HomeScreen = () => {
           <p>37.1kk</p>
           <p>Part Time</p>
         </div>
+        <button onClick={handleActionsRequired}>
+          show action required posts
+        </button>
       </div>
 
       <div className="nav-items-list">

@@ -112,9 +112,11 @@ export const createJobPost = async (createJobData) => {
 
     //prepare the payload for creatingJobListing including the profileId as userId
     const payload = {
+      name: createJobData.name,
       category: createJobData.dropDownLabel,
       service_availability_duration: createJobData.time,
       date: createJobData.date,
+      contact: createJobData.contact,
       price: createJobData.price,
       job_description: createJobData.description,
       userId: profile.profileId, //from sessionStorage
@@ -185,9 +187,11 @@ export const getJobListingsByWorker = async (userId) => {
 export const updateJobListings = async (id, updateJobData) => {
   try {
     const payload = {
+      name: updateJobData.name,
       category: updateJobData.dropDownLabel,
       service_availability_duration: updateJobData.time,
       date: updateJobData.date,
+      contact: updateJobData.contact,
       price: updateJobData.price,
       job_description: updateJobData.description,
       status: updateJobData.status,
@@ -228,6 +232,56 @@ export const deleteJobListings = async (id) => {
     return data;
   } catch (error) {
     console.error("Error deleting job listings:", error);
+    throw error;
+  }
+};
+
+//function to call API for accepting a service request by a worker
+export const acceptServiceRequest = async (workerId, serviceRequestId) => {
+  try {
+    const response = await fetch(`${API_URL}/accept/byWorker`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        workerId: workerId,
+        serviceRequestId: serviceRequestId,
+      }),
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log("Service request accepted successfully:", data);
+      // Update the UI or state based on the successful response
+    } else {
+      console.error("Error accepting service request:", data.msg);
+    }
+  } catch (error) {
+    console.error("Error making API request:", error);
+  }
+};
+
+//action required by worker
+//fetch accepted job postings
+export const fetchAllAcceptedJobPostings = async (workerId) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/fetchAllAcceptedJobPostings/${workerId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching accepted job postings:", error);
     throw error;
   }
 };

@@ -5,16 +5,36 @@ import editIcon from "../../assets/edit.png";
 import deleteIcon from "../../assets/delete.png";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../ConfirmationModal";
-
+import { acceptServiceRequest } from "../../api/WorkerApi";
 import { useDeleteServiceRequestsHandler } from "../../containers/ServiceRequests/ShowServiceRequests/hooks/useDeleteServiceRequestsHandler";
 
-const ServiceRequestsCard = ({ service }) => {
-  const [showOptions, setShowOptions] = useState();
+const ServiceRequestsCard = ({
+  service,
+  isShowServiceRequest,
+  workerId,
+  serviceRequestId,
+}) => {
+  const [showOptions, setShowOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isAccepted, setIsAccepted] = useState(service.status === "Accepted"); // Set initial state based on service status
   const optionsRef = useRef(null);
 
   const navigate = useNavigate();
   const deleteServiceRequestsMutation = useDeleteServiceRequestsHandler();
+
+  // Function to handle acceptance of service request
+  const handleAccept = async () => {
+    console.log("Worker ID:", workerId);
+    console.log("Service Request ID:", serviceRequestId);
+    try {
+      // Call the acceptServiceRequest function with the necessary parameters
+      await acceptServiceRequest(workerId, serviceRequestId);
+      console.log("Service request accepted successfully");
+      setIsAccepted(true); // Update the accepted state
+    } catch (error) {
+      console.error("Error accepting service request:", error);
+    }
+  };
 
   const handleDelete = () => {
     try {
@@ -51,31 +71,39 @@ const ServiceRequestsCard = ({ service }) => {
   }, [optionsRef]);
 
   return (
-    <StyledServiceRequestsCard>
+    <StyledServiceRequestsCard
+      style={{
+        borderColor: isAccepted ? "green" : "initial", // Change border color when accepted
+      }}
+    >
       <div className="service-card-header">
         <h2 className="service-card-title">{service.service_requested}</h2>
-        <img
-          src={Options}
-          alt="Options"
-          onClick={() => setShowOptions(!showOptions)}
-          aria-label="Options Menu"
-          className="options"
-        />
-        {showOptions && (
-          <div className="options-menu" ref={optionsRef}>
+        {isShowServiceRequest && (
+          <>
             <img
-              src={editIcon}
-              alt="Edit"
-              onClick={handleEdit}
-              aria-label="Edit Service"
+              src={Options}
+              alt="Options"
+              onClick={() => setShowOptions(!showOptions)}
+              aria-label="Options Menu"
+              className="options"
             />
-            <img
-              src={deleteIcon}
-              alt="Delete"
-              onClick={() => setShowDeleteModal(true)}
-              aria-label="Delete Service"
-            />
-          </div>
+            {showOptions && (
+              <div className="options-menu" ref={optionsRef}>
+                <img
+                  src={editIcon}
+                  alt="Edit"
+                  onClick={handleEdit}
+                  aria-label="Edit Service"
+                />
+                <img
+                  src={deleteIcon}
+                  alt="Delete"
+                  onClick={() => setShowDeleteModal(true)}
+                  aria-label="Delete Service"
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
       <p>{service.description || "No description provided"}</p>
@@ -86,15 +114,31 @@ const ServiceRequestsCard = ({ service }) => {
         <p>Duration: {service.estimatedDuration || "N/A"}</p>
         <p>Price: ${service.price || 0}</p>
         <p>Posted By: {service.name}</p>
-        <p>Contact:{service.contact}</p>
-        <p>Status: {service.status || "Pending"}</p>
+        <p>Contact: {service.contact}</p>
+        <p>
+          Status: {isAccepted ? "Accepted" : service.status || "Pending"}
+        </p>{" "}
+        {/* Show accepted status */}
       </div>
 
-      <ConfirmationModal
-        isOpen={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
-        onConfirm={handleDelete}
-      />
+      {isShowServiceRequest ? (
+        <ConfirmationModal
+          isOpen={showDeleteModal}
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={handleDelete}
+        />
+      ) : (
+        <div className="accept-reject-actions">
+          <button
+            className={`accept action ${isAccepted ? "disabled" : ""}`}
+            onClick={handleAccept}
+            disabled={isAccepted} // Prevent accepting again
+          >
+            ACCEPT
+          </button>
+          <button className="reject action">REJECT</button>
+        </div>
+      )}
     </StyledServiceRequestsCard>
   );
 };

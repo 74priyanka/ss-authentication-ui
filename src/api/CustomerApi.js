@@ -255,3 +255,49 @@ export const deleteServiceRequests = async (id) => {
     throw error;
   }
 };
+
+//action required by customer
+//fetch accepted service requests for the customer
+export const fetchAllAcceptedServiceRequests = async (customerId) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/fetchAllAcceptedServiceRequests/${customerId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching accepted service requests:", error);
+    throw error;
+  }
+};
+
+//function to call API for accepting a worker job posting by a customer
+export const acceptJobPosting = async (customerId, jobListingId) => {
+  try {
+    const response = await fetch(`${API_URL}/accept/byCustomer`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ customerId, jobListingId }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Job Posting  accepted successfully:", data);
+      // Update the UI or state based on the successful response
+    } else {
+      console.error("Error accepting Job Posting:", data.msg);
+    }
+  } catch (error) {
+    console.error("Error making API request:", error);
+  }
+};

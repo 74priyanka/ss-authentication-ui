@@ -100,4 +100,17 @@ export const StyledJobCard = styled.div`
       flex: 1 1 30%; /* Allow 3 items per row */
     }
   }
+
+  .action {
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    width: 84%;
+    max-width: 400px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;

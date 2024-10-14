@@ -183,4 +183,17 @@ export const StyledServiceRequestsCard = styled.div`
       gap: 8px;
     }
   }
+
+  .action {
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    width: 84%;
+    max-width: 400px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;

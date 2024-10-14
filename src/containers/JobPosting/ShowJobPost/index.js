@@ -46,7 +46,7 @@ const ShowJobPost = () => {
 
       <div className="job-card-container">
         {jobListings.map((job) => (
-          <JobCard key={job._id} job={job} />
+          <JobCard key={job._id} job={job} isShowJobPosting={true} />
         ))}
       </div>
       <div className="button-container">

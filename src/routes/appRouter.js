@@ -25,6 +25,8 @@ import CreateServiceRequests from "../containers/ServiceRequests/CreateServiceRe
 import ShowServiceRequests from "../containers/ServiceRequests/ShowServiceRequests";
 import ActionRequiredByCustomer from "../customerContainers/ActionRequiredByCustomer";
 import ActionRequiredByWorker from "../containers/ActionRequiredByWorker";
+import ShowConfirmedRequests from "../containers/ServiceRequests/ShowConfirmedRequests";
+import ShowConfirmedJobs from "../containers/JobPosting/ShowConfirmedJobs";
 
 //customer
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
@@ -139,6 +141,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/showServiceRequests",
         element: <ShowServiceRequests />,
+      },
+      {
+        path: "/showConfirmedRequests",
+        element: <ShowConfirmedRequests />,
+      },
+      {
+        path: "/showConfirmedJobs",
+        element: <ShowConfirmedJobs />,
       },
       {
         path: "/actionByCustomer",

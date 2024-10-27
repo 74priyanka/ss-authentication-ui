@@ -1,57 +1,89 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { fetchAllAcceptedJobPostings } from "../../api/WorkerApi";
+import { useQuery } from "@tanstack/react-query";
+import {
+  fetchAllAcceptedJobPostings,
+  confirmByWorker,
+} from "../../api/WorkerApi";
+import { StyledJobCard } from "../../reusableComponents/JobCard/style";
 
 const ActionRequiredByWorker = () => {
   const location = useLocation();
-  const { workerId } = location.state || {}; // Extract workerId from location.state
+  const { workerId } = location.state || {};
 
-  const [acceptedJobPosts, setAcceptedJobPosts] = useState([]);
-  const [error, setError] = useState("");
+  const [jobPostsState, setJobPostsState] = useState([]);
 
+  const {
+    data: acceptedJobPosts = [],
+    error,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["acceptedJobPosts", workerId],
+    queryFn: () => fetchAllAcceptedJobPostings(workerId),
+    enabled: !!workerId,
+    refetchInterval: 5000,
+  });
+
+  // Update job posts state when acceptedJobPosts changes
   useEffect(() => {
-    if (!workerId) return;
-    console.log("Worker ID:", workerId);
-    const getAcceptedJobPosts = async () => {
-      try {
-        const data = await fetchAllAcceptedJobPostings(workerId);
-        console.log("Fetched Data:", data);
-        setAcceptedJobPosts(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    getAcceptedJobPosts();
-  }, [workerId]);
+    if (acceptedJobPosts.length > 0) {
+      setJobPostsState(acceptedJobPosts);
+    } else {
+      setJobPostsState([]);
+    }
+  }, [acceptedJobPosts]);
+
+  const handleConfirm = async (jobPost) => {
+    try {
+      await confirmByWorker(jobPost.job_posting_id);
+      await refetch(); // Ensure the data is refetched after confirmation
+    } catch (error) {
+      console.error("Error confirming job post:", error.message);
+    }
+  };
 
   if (!workerId) {
     return <p>Worker ID is missing. Please try again later.</p>;
   }
 
-  const handleConfirm = (worker) => {
-    // Redirect to WhatsApp with worker details
-    const message = `I would like to confirm the service with ${worker.accepted_by_worker_name}. Please contact me.`;
-    const phone = worker.accepted_by_worker_phone_number;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`);
-  };
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading accepted job posts: {error.message}</p>;
 
   return (
     <div>
       <h2>Action Required By Worker</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {acceptedJobPosts.length === 0 ? (
+      {jobPostsState.length === 0 ? (
         <p>No accepted job postings found.</p>
       ) : (
-        acceptedJobPosts.map((request) => (
-          <div key={request._id} className="accepted-job-post">
-            <p>Job Post ID: {request.job_posting_id}</p>
-            <p>Accepted by: {request.accepted_by_customer_name}</p>
-            <p>Customer Id: {request.accepted_by_customer_id}</p>
-            <p>Customer Contact: {request.accepted_by_customer_phone_number}</p>
-            <button onClick={() => handleConfirm(request)}>Confirm</button>
-            <button>Reject</button>{" "}
-            {/* Logic to handle rejection can be added */}
-          </div>
+        jobPostsState.map((jobPost) => (
+          <StyledJobCard
+            key={jobPost.job_posting_id}
+            style={{
+              borderColor: jobPost.status === "Confirmed" ? "green" : "initial",
+            }}
+          >
+            <div className="job-card-header">
+              <h2 className="job-card-title">{jobPost.job_title}</h2>
+            </div>
+            <p>Job Post ID: {jobPost.job_posting_id}</p>
+            <p>Accepted by: {jobPost.accepted_by_customer_name}</p>
+            <p>Customer Id: {jobPost.accepted_by_customer_id}</p>
+            <p>Customer Contact: {jobPost.accepted_by_customer_phone_number}</p>
+
+            <div className="accept-reject-actions">
+              <button
+                className={`confirm action ${
+                  jobPost.status === "Confirmed" ? "disabled" : ""
+                }`}
+                onClick={() => handleConfirm(jobPost)}
+                disabled={jobPost.status === "Confirmed"}
+              >
+                {jobPost.status === "Confirmed" ? "Confirmed" : "Confirm"}
+              </button>
+              <button className="reject action">Reject</button>
+            </div>
+          </StyledJobCard>
         ))
       )}
     </div>

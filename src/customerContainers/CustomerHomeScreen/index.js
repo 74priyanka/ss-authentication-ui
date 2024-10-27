@@ -37,6 +37,10 @@ const CustomerHomeScreen = () => {
     navigate("/customerProfile");
   };
 
+  const handleConfirmedRequestsByWorker = () => {
+    navigate("/showConfirmedRequests");
+  };
+
   return (
     <StyledCustomerHomeScreen className="home-screen">
       <header className="header">
@@ -72,6 +76,9 @@ const CustomerHomeScreen = () => {
         </div>
         <button onClick={handleActionsRequired}>
           show action required posts
+        </button>
+        <button onClick={handleConfirmedRequestsByWorker}>
+          show confirmed requests by customer
         </button>
       </div>
 

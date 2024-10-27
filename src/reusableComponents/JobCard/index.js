@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../ConfirmationModal";
 import { acceptJobPosting } from "../../api/CustomerApi";
 
-const JobCard = ({ job, isShowJobPosting, customerId, jobListingId }) => {
+const JobCard = ({ job, isShowJobPosting }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAccepted, setIsAccepted] = useState(job.status === "Accepted");
@@ -16,17 +16,37 @@ const JobCard = ({ job, isShowJobPosting, customerId, jobListingId }) => {
   const deleteJobMutation = useDeleteJobPostHandler();
   const optionsRef = useRef(null);
 
-  //function to handle acceptance of Job Posting
+  // Retrieve CustomerProfile from sessionStorage
+  const customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  // Extract customerId from customerProfile
+  const customerId = customerProfile?.customerProfileId;
+  const jobListingId = job._id;
+
+  useEffect(() => {
+    // Check localStorage for accepted status
+    const acceptedJobs = JSON.parse(localStorage.getItem("acceptedJobs")) || {};
+    if (acceptedJobs[jobListingId]) {
+      setIsAccepted(true); // Set accepted state based on localStorage
+    }
+  }, [jobListingId]);
+
+  // Function to handle acceptance of job posting
   const handleAccept = async () => {
-    console.log("customer id:", customerId);
-    console.log("job listing id:", jobListingId);
+    console.log("Customer ID:", customerId);
+    console.log("Job Listing ID:", jobListingId);
     try {
-      // Call the acceptJobPosting function with the necessary parameters
       await acceptJobPosting(customerId, jobListingId);
       console.log("Job Posting accepted successfully");
-      setIsAccepted(true);
+
+      // Update localStorage
+      const acceptedJobs =
+        JSON.parse(localStorage.getItem("acceptedJobs")) || {};
+      acceptedJobs[jobListingId] = true; // Mark as accepted
+      localStorage.setItem("acceptedJobs", JSON.stringify(acceptedJobs));
+
+      setIsAccepted(true); // Update the accepted state
     } catch (error) {
-      console.error("Error accepting Job Posting:", error);
+      console.error("Error accepting job posting:", error);
     }
   };
 
@@ -102,7 +122,7 @@ const JobCard = ({ job, isShowJobPosting, customerId, jobListingId }) => {
         <p>${job.price}</p>
         <p>Posted By: {job.name}</p>
 
-        <p> {isAccepted ? "Accepted" : job.status || "Pending"}</p>
+        <p> {job.status}</p>
       </div>
 
       {isShowJobPosting ? (

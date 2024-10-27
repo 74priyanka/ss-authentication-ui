@@ -301,3 +301,23 @@ export const acceptJobPosting = async (customerId, jobListingId) => {
     console.error("Error making API request:", error);
   }
 };
+
+//confirm by customer
+export const confirmByCustomer = async (requestId) => {
+  try {
+    const response = await fetch(`${API_URL}/confirmByCustomer/${requestId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Request confirmed successfully:", data);
+    } else {
+      console.error("Error confirming:", data.msg);
+    }
+  } catch (error) {
+    console.error("Error making API request:", error);
+  }
+};

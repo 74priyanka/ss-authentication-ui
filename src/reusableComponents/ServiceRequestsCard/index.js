@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyledServiceRequestsCard } from "./style"; // Assuming similar to StyledJobCard
+import { StyledServiceRequestsCard } from "./style";
 import Options from "../../assets/Options.png";
 import editIcon from "../../assets/edit.png";
 import deleteIcon from "../../assets/delete.png";
@@ -8,19 +8,26 @@ import ConfirmationModal from "../ConfirmationModal";
 import { acceptServiceRequest } from "../../api/WorkerApi";
 import { useDeleteServiceRequestsHandler } from "../../containers/ServiceRequests/ShowServiceRequests/hooks/useDeleteServiceRequestsHandler";
 
-const ServiceRequestsCard = ({
-  service,
-  isShowServiceRequest,
-  workerId,
-  serviceRequestId,
-}) => {
+const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [isAccepted, setIsAccepted] = useState(service.status === "Accepted"); // Set initial state based on service status
+  const [isAccepted, setIsAccepted] = useState(false); // Initial state is false
   const optionsRef = useRef(null);
 
+  const workerProfile = JSON.parse(sessionStorage.getItem("profile"));
+  const workerId = workerProfile?.profileId;
+  const serviceRequestId = service._id;
   const navigate = useNavigate();
   const deleteServiceRequestsMutation = useDeleteServiceRequestsHandler();
+
+  useEffect(() => {
+    // Check localStorage for accepted status
+    const acceptedServices =
+      JSON.parse(localStorage.getItem("acceptedServices")) || {};
+    if (acceptedServices[serviceRequestId]) {
+      setIsAccepted(true); // Set accepted state based on localStorage
+    }
+  }, [serviceRequestId]);
 
   // Function to handle acceptance of service request
   const handleAccept = async () => {
@@ -30,6 +37,16 @@ const ServiceRequestsCard = ({
       // Call the acceptServiceRequest function with the necessary parameters
       await acceptServiceRequest(workerId, serviceRequestId);
       console.log("Service request accepted successfully");
+
+      // Update localStorage
+      const acceptedServices =
+        JSON.parse(localStorage.getItem("acceptedServices")) || {};
+      acceptedServices[serviceRequestId] = true; // Mark as accepted
+      localStorage.setItem(
+        "acceptedServices",
+        JSON.stringify(acceptedServices)
+      );
+
       setIsAccepted(true); // Update the accepted state
     } catch (error) {
       console.error("Error accepting service request:", error);
@@ -115,10 +132,7 @@ const ServiceRequestsCard = ({
         <p>Price: ${service.price || 0}</p>
         <p>Posted By: {service.name}</p>
         <p>Contact: {service.contact}</p>
-        <p>
-          Status: {isAccepted ? "Accepted" : service.status || "Pending"}
-        </p>{" "}
-        {/* Show accepted status */}
+        <p>Status: {service.status} </p>
       </div>
 
       {isShowServiceRequest ? (

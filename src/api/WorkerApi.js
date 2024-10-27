@@ -285,3 +285,23 @@ export const fetchAllAcceptedJobPostings = async (workerId) => {
     throw error;
   }
 };
+
+//confirm by worker
+export const confirmByWorker = async (jobId) => {
+  try {
+    const response = await fetch(`${API_URL}/confirmByWorker/${jobId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Job confirmed successfully:", data);
+    } else {
+      console.error("Error confirming:", data.msg);
+    }
+  } catch (error) {
+    console.error("Error making API request:", error);
+  }
+};

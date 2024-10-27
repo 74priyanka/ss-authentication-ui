@@ -42,6 +42,10 @@ const HomeScreen = () => {
     navigate("/homescreen");
   };
 
+  const handleConfirmedJobByWorker = () => {
+    navigate("/showConfirmedJobs");
+  };
+
   return (
     <StyledHomeScreen className="home-screen">
       <header className="header">
@@ -76,6 +80,9 @@ const HomeScreen = () => {
         </div>
         <button onClick={handleActionsRequired}>
           show action required posts
+        </button>
+        <button onClick={handleConfirmedJobByWorker}>
+          show confirmed jobs by worker
         </button>
       </div>
 

@@ -19,7 +19,6 @@ export const StyledServiceRequestsCard = styled.div`
   background-color: ${colors.cardBackground || "#fff"};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  width: 100%;
 
   &:hover {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -216,5 +215,15 @@ export const StyledServiceRequestsCard = styled.div`
     }
 
     transition: transform 0.3s ease-in-out;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    background-color: gray;
+
+    &:hover {
+      background-color: gray;
+      cursor: not-allowed;
+    }
   }
 `;

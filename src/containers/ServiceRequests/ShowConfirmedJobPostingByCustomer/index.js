@@ -6,7 +6,7 @@ import { StyledShowJobPost } from "./style"; // Import the styled component for 
 import { getJobListings } from "../../../api/WorkerApi"; // Import the API function to fetch job listings
 import Home from "../../../assets/Home.png";
 
-const ShowConfirmedJobs = () => {
+const ShowConfirmedJobPostingByCustomer = () => {
   const navigate = useNavigate(); // Initialize the navigate function for navigation purposes
 
   const handleHome = () => {
@@ -53,4 +53,4 @@ const ShowConfirmedJobs = () => {
   );
 };
 
-export default ShowConfirmedJobs;
+export default ShowConfirmedJobPostingByCustomer;

@@ -26,6 +26,11 @@ export const StyledActionRequiredByCustomer = styled.div`
     align-items: center;
   }
 
+  .action-by-customer-body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .action-container {
     background-color: #eee5fb;
     border: none;

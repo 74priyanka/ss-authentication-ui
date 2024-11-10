@@ -127,9 +127,19 @@ export const StyledJobCard = styled.div`
       cursor: pointer;
       transition: box-shadow 0.5s ease;
       box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.15);
-      animation: ${scaleUp} 0.3s ease-in-out forwards;
+      /* animation: ${scaleUp} 0.3s ease-in-out forwards; */
     }
 
     transition: transform 0.3s ease-in-out;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    background-color: gray;
+
+    &:hover {
+      background-color: gray;
+      cursor: not-allowed;
+    }
   }
 `;

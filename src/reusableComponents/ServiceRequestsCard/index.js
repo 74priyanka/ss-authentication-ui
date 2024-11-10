@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../ConfirmationModal";
 import { acceptServiceRequest } from "../../api/WorkerApi";
 import { useDeleteServiceRequestsHandler } from "../../containers/ServiceRequests/ShowServiceRequests/hooks/useDeleteServiceRequestsHandler";
+import { STATUS } from "../../Constants/appConstant";
 
 const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -14,7 +15,7 @@ const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
   const [isAccepted, setIsAccepted] = useState(false); // Initial state is false
   const optionsRef = useRef(null);
 
-  const workerProfile = JSON.parse(sessionStorage.getItem("profile"));
+  const workerProfile = JSON.parse(localStorage.getItem("profile"));
   const workerId = workerProfile?.profileId;
   const serviceRequestId = service._id;
   const navigate = useNavigate();
@@ -30,24 +31,35 @@ const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
   }, [serviceRequestId]);
 
   // Function to handle acceptance of service request
-  const handleAccept = async () => {
+  const handleAcceptAndReject = async (buttonAction) => {
     console.log("Worker ID:", workerId);
     console.log("Service Request ID:", serviceRequestId);
     try {
       // Call the acceptServiceRequest function with the necessary parameters
-      await acceptServiceRequest(workerId, serviceRequestId);
+      await acceptServiceRequest(workerId, serviceRequestId, buttonAction);
       console.log("Service request accepted successfully");
 
-      // Update localStorage
-      const acceptedServices =
-        JSON.parse(localStorage.getItem("acceptedServices")) || {};
-      acceptedServices[serviceRequestId] = true; // Mark as accepted
-      localStorage.setItem(
-        "acceptedServices",
-        JSON.stringify(acceptedServices)
-      );
+      if (buttonAction === STATUS.ACCEPTED) {
+        const acceptedServices =
+          JSON.parse(localStorage.getItem("acceptedServices")) || {};
+        acceptedServices[serviceRequestId] = true; // Mark as accepted
 
-      setIsAccepted(true); // Update the accepted state
+        localStorage.setItem(
+          "acceptedServices",
+          JSON.stringify(acceptedServices)
+        );
+        setIsAccepted(true); // Update the accepted state
+      }
+
+      if (buttonAction === STATUS.PENDING) {
+        const acceptedServices =
+          JSON.parse(localStorage.getItem("acceptedServices")) || {};
+        delete acceptedServices[serviceRequestId];
+        localStorage.setItem(
+          "acceptedServices",
+          JSON.stringify(acceptedServices)
+        );
+      }
     } catch (error) {
       console.error("Error accepting service request:", error);
     }
@@ -132,7 +144,7 @@ const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
         <p>Price: ${service.price || 0}</p>
         <p>Posted By: {service.name}</p>
         <p>Contact: {service.contact}</p>
-        <p>Status: {service.status} </p>
+        <p>Status: {service.status}</p>
       </div>
 
       {isShowServiceRequest ? (
@@ -144,13 +156,18 @@ const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
       ) : (
         <div className="accept-reject-actions">
           <button
-            className={`accept action ${isAccepted ? "disabled" : ""}`}
-            onClick={handleAccept}
+            className={`action ${isAccepted ? "disabled" : "accept"}`}
+            onClick={() => handleAcceptAndReject(STATUS.ACCEPTED)}
             disabled={isAccepted} // Prevent accepting again
           >
             ACCEPT
           </button>
-          <button className="reject action">REJECT</button>
+          <button
+            className="reject action"
+            onClick={() => handleAcceptAndReject(STATUS.PENDING)}
+          >
+            REJECT
+          </button>
         </div>
       )}
     </StyledServiceRequestsCard>

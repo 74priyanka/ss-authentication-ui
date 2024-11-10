@@ -59,50 +59,53 @@ const ActionRequiredByCustomer = () => {
         <h1>Action Required by Customer</h1>
         <img src={Home} alt="" onClick={handleHome} className="home-screen" />
       </div>
-      {requestsState.length === 0 ? (
-        <p>No requests available for confirmation or rejection.</p>
-      ) : (
-        requestsState.map((request) => (
-          <StyledServiceRequestsCard
-            key={request.service_request_id}
-            style={{
-              borderColor: request.status === "Confirmed" ? "green" : "initial",
-            }}
-            className="action-container"
-          >
-            <div className="service-card-header">
-              <h2 className="service-card-title">
-                {request.service_requested}
-              </h2>
-            </div>
-            {/* <p>Service Request ID: {request.service_request_id}</p> */}
-            <p>Service Requested: {request.service_request_name}</p>
-            <p>Accepted by: {request.accepted_by_worker_name}</p>
-            {/* <p>Worker Id: {request.accepted_by_worker_id}</p> */}
-            <p>Worker Contact: {request.accepted_by_worker_phone_number}</p>
-            <p>
-              Skills:{" "}
-              {request.accepted_by_worker_skills &&
-              request.accepted_by_worker_skills.length > 0
-                ? request.accepted_by_worker_skills.join(", ")
-                : "No skills provided"}
-            </p>
+      <div className="action-by-customer-body">
+        {requestsState.length === 0 ? (
+          <p>No requests available for confirmation or rejection.</p>
+        ) : (
+          requestsState.map((request) => (
+            <StyledServiceRequestsCard
+              key={request.service_request_id}
+              style={{
+                borderColor:
+                  request.status === "Confirmed" ? "green" : "initial",
+              }}
+              className="action-container"
+            >
+              <div className="service-card-header">
+                <h2 className="service-card-title">
+                  {request.service_requested}
+                </h2>
+              </div>
+              {/* <p>Service Request ID: {request.service_request_id}</p> */}
+              <p>Service Requested: {request.service_request_name}</p>
+              <p>Accepted by: {request.accepted_by_worker_name}</p>
+              {/* <p>Worker Id: {request.accepted_by_worker_id}</p> */}
+              <p>Worker Contact: {request.accepted_by_worker_phone_number}</p>
+              <p>
+                Skills:{" "}
+                {request.accepted_by_worker_skills &&
+                request.accepted_by_worker_skills.length > 0
+                  ? request.accepted_by_worker_skills.join(", ")
+                  : "No skills provided"}
+              </p>
 
-            <div className="accept-reject-actions">
-              <button
-                className={`confirm action ${
-                  request.status === "Confirmed" ? "disabled" : ""
-                }`}
-                onClick={() => handleConfirm(request)}
-                disabled={request.status === "Confirmed"}
-              >
-                {request.status === "Confirmed" ? "Confirmed" : "Confirm"}
-              </button>
-              <button className="reject action">Reject</button>
-            </div>
-          </StyledServiceRequestsCard>
-        ))
-      )}
+              <div className="accept-reject-actions">
+                <button
+                  className={`confirm action ${
+                    request.status === "Confirmed" ? "disabled" : ""
+                  }`}
+                  onClick={() => handleConfirm(request)}
+                  disabled={request.status === "Confirmed"}
+                >
+                  {request.status === "Confirmed" ? "Confirmed" : "Confirm"}
+                </button>
+                <button className="reject action">Reject</button>
+              </div>
+            </StyledServiceRequestsCard>
+          ))
+        )}
+      </div>
     </StyledActionRequiredByCustomer>
   );
 };

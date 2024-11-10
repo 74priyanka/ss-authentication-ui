@@ -14,7 +14,7 @@ import homescreen from "../../../assets/homescreen.png";
 const WorkerProfile = () => {
   const navigate = useNavigate();
   // Retrieve the profile ID from session storage
-  const profileData = sessionStorage.getItem("profile"); // Assuming it's stored as a string
+  const profileData = localStorage.getItem("profile"); // Assuming it's stored as a string
   const profileId = JSON.parse(profileData).profileId;
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profileData", profileId], // Include profileId in the query key

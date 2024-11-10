@@ -8,8 +8,8 @@ import Home from "../../../assets/Home.png";
 
 const ShowServiceRequests = () => {
   const navigate = useNavigate();
-  // Get customerProfileId from sessionStorage
-  const CustomerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  // Get customerProfileId from localStorage
+  const CustomerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
 
   const handleCreate = () => {
     navigate("/createServiceRequests");

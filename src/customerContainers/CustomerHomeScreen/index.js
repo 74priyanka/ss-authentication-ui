@@ -14,7 +14,7 @@ const CustomerHomeScreen = () => {
   const navigate = useNavigate();
 
   // Retrieve CustomerProfile from sessionStorage
-  const customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  const customerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
   // Extract customerId from customerProfile
   const customerId = customerProfile?.customerProfileId;
 
@@ -39,6 +39,14 @@ const CustomerHomeScreen = () => {
 
   const handleConfirmedRequestsByWorker = () => {
     navigate("/showConfirmedRequests");
+  };
+
+  const handleAcceptedJobPosting = () => {
+    navigate("/showAcceptedJobPosting");
+  };
+
+  const handleConfirmedJobPosting = () => {
+    navigate("/showConfirmedJobPostingByCustomer");
   };
 
   return (
@@ -68,9 +76,11 @@ const CustomerHomeScreen = () => {
           <p>SERVICE REQUESTS</p>
           <p>POSTED BY ME</p>
         </div>
-        <div className="job-card-3">
-          <p>37.1kk</p>
-          <p>Part Time</p>
+        <div className="job-card-3" onClick={handleAcceptedJobPosting}>
+          Accepted Job Postings
+        </div>
+        <div className="job-card-3" onClick={handleConfirmedJobPosting}>
+          Confirmed Job Postings
         </div>
         <div className="action-button" onClick={handleActionsRequired}>
           <p>Action Required</p>

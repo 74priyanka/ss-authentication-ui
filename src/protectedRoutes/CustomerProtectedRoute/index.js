@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const WorkerProtectedRoute = () => {
+const CustomerProtectedRoute = () => {
   const [authState, setAuthState] = useState({
     isLoading: true,
     isAuthenticated: false,
@@ -10,18 +10,18 @@ const WorkerProtectedRoute = () => {
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        const profile = localStorage.getItem("profile");
+        const CustomerProfile = localStorage.getItem("CustomerProfile");
 
-        if (!profile) {
+        if (!CustomerProfile) {
           setAuthState({ isLoading: false, isAuthenticated: false });
           return;
         }
 
-        // Parse the profile to ensure it's valid
-        const parsedProfile = JSON.parse(profile);
+        // Parse the CustomerProfile to ensure it's valid
+        const parsedCustomerProfile = JSON.parse(CustomerProfile);
 
         // Add any additional validation you need here
-        const isValid = parsedProfile && parsedProfile.token; // Adjust based on your token structure
+        const isValid = parsedCustomerProfile && parsedCustomerProfile.token; // Adjust based on your token structure
 
         setAuthState({
           isLoading: false,
@@ -60,4 +60,4 @@ const WorkerProtectedRoute = () => {
   return <Outlet />;
 };
 
-export default WorkerProtectedRoute;
+export default CustomerProtectedRoute;

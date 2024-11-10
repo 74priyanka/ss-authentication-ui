@@ -47,9 +47,7 @@ const CreateServiceRequests = () => {
 
   const handleSave = async () => {
     //get customerProfileId from sessionStorage
-    const CustomerProfile = JSON.parse(
-      sessionStorage.getItem("CustomerProfile")
-    );
+    const CustomerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
     const customerProfileId = CustomerProfile.customerProfileId;
 
     if (!CustomerProfile || !customerProfileId) {

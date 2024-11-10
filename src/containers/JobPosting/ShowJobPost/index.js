@@ -9,9 +9,9 @@ import Home from "../../../assets/Home.png";
 const ShowJobPost = () => {
   const navigate = useNavigate();
 
-  // Get the worker's profileId from sessionStorage (this is the userId)
+  // Get the worker's profileId from localStorage (this is the userId)
 
-  const profile = JSON.parse(sessionStorage.getItem("profile"));
+  const profile = JSON.parse(localStorage.getItem("profile"));
   const handleCreate = () => {
     navigate("/createJobPost");
   };

@@ -2,6 +2,7 @@ const API_URL = "http://localhost:3000";
 
 //function to handle worker login
 export const workerLogin = async (credentials) => {
+  debugger;
   try {
     const response = await fetch(`${API_URL}/workers/login`, {
       method: "POST",
@@ -15,7 +16,7 @@ export const workerLogin = async (credentials) => {
     }
     const data = await response.json();
     console.log("worker data", data);
-    await sessionStorage.setItem("profile", JSON.stringify(data));
+    await localStorage.setItem("profile", JSON.stringify(data));
 
     return data;
   } catch (error) {
@@ -35,8 +36,8 @@ export const fetchWorkerUserProfileData = async (profileId) => {
 //function to handle worker logout
 export const workerLogout = async () => {
   try {
-    const token = sessionStorage.getItem("profile")
-      ? JSON.parse(sessionStorage.getItem("profile")).token
+    const token = localStorage.getItem("profile")
+      ? JSON.parse(localStorage.getItem("profile")).token
       : null;
     const response = await fetch(`${API_URL}/workers/logout`, {
       method: "POST",
@@ -49,8 +50,8 @@ export const workerLogout = async () => {
       throw new Error(response.statusText);
     }
 
-    //clear the session storage
-    sessionStorage.removeItem("profile");
+    //clear the local storage
+    localStorage.removeItem("profile");
 
     return true;
   } catch (error) {
@@ -104,7 +105,7 @@ export const fetchWorkerProfileData = async () => {
 export const createJobPost = async (createJobData) => {
   try {
     //get the worker's profileId from sessionStorage
-    const profile = JSON.parse(sessionStorage.getItem("profile"));
+    const profile = JSON.parse(localStorage.getItem("profile"));
 
     if (!profile || !profile.profileId) {
       throw new Error("worker is not logged in");
@@ -237,7 +238,11 @@ export const deleteJobListings = async (id) => {
 };
 
 //function to call API for accepting a service request by a worker
-export const acceptServiceRequest = async (workerId, serviceRequestId) => {
+export const acceptServiceRequest = async (
+  workerId,
+  serviceRequestId,
+  buttonAction
+) => {
   try {
     const response = await fetch(`${API_URL}/accept/byWorker`, {
       method: "POST",
@@ -247,6 +252,7 @@ export const acceptServiceRequest = async (workerId, serviceRequestId) => {
       body: JSON.stringify({
         workerId: workerId,
         serviceRequestId: serviceRequestId,
+        action: buttonAction,
       }),
     });
     const data = await response.json();

@@ -14,7 +14,7 @@ const HomeScreen = () => {
   const navigate = useNavigate();
 
   // Retrieve workerProfile from sessionStorage
-  const workerProfile = JSON.parse(sessionStorage.getItem("profile"));
+  const workerProfile = JSON.parse(localStorage.getItem("profile"));
   // Extract customerId from customerProfile
   const workerId = workerProfile?.profileId;
 
@@ -46,6 +46,14 @@ const HomeScreen = () => {
     navigate("/showConfirmedJobs");
   };
 
+  const handleAcceptedServiceRequests = () => {
+    navigate("/showAcceptedServiceRequests");
+  };
+
+  const handleConfirmedServiceRequests = () => {
+    navigate("/showConfirmedRequestsByWorker");
+  };
+
   return (
     <StyledHomeScreen className="home-screen">
       <header className="header">
@@ -72,9 +80,11 @@ const HomeScreen = () => {
           <p>JOB POSTED</p>
           <p>BY ME</p>
         </div>
-        <div className="job-card-3">
-          <p>37.1kk</p>
-          <p>Part Time</p>
+        <div className="job-card-3" onClick={handleAcceptedServiceRequests}>
+          Accepted Service Requests
+        </div>
+        <div className="job-card-3" onClick={handleConfirmedServiceRequests}>
+          Confirmed Service Requests
         </div>
         <div className="action-button" onClick={handleActionsRequired}>
           <p>Action Required</p>

@@ -27,22 +27,19 @@ import ActionRequiredByCustomer from "../customerContainers/ActionRequiredByCust
 import ActionRequiredByWorker from "../containers/ActionRequiredByWorker";
 import ShowConfirmedRequests from "../containers/ServiceRequests/ShowConfirmedRequests";
 import ShowConfirmedJobs from "../containers/JobPosting/ShowConfirmedJobs";
+import ShowConfirmedRequestsByWorker from "../containers/ShowConfirmedRequestsByWorker";
 
 //customer
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
 import CustomerLogin from "../customerContainers/CustomerLogin";
 import CustomerSignup from "../customerContainers/CustomerSignup";
 import WorkerProtectedRoute from "../protectedRoutes/WorkerProtectedRoute";
+import CustomerProtectedRoute from "../protectedRoutes/CustomerProtectedRoute";
+import ShowAcceptedServiceRequests from "../containers/ServiceRequests/ShowAcceptedServiceRequests";
+import ShowAcceptedJobPost from "../containers/JobPosting/ShowAcceptedJobPost";
+import ShowConfirmedJobPostingByCustomer from "../containers/ServiceRequests/ShowConfirmedJobPostingByCustomer";
 
 const workerAppRoute = [
-  {
-    path: "/login/worker",
-    element: <Login />,
-  },
-  {
-    path: "/signup/worker",
-    element: <Signup />,
-  },
   {
     path: "/homescreen",
     element: <HomeScreen />,
@@ -71,18 +68,17 @@ const workerAppRoute = [
     path: "/showConfirmedJobs",
     element: <ShowConfirmedJobs />,
   },
+  {
+    path: "/showAcceptedServiceRequests",
+    element: <ShowAcceptedServiceRequests />,
+  },
+  {
+    path: "/showConfirmedRequestsByWorker",
+    element: <ShowConfirmedRequestsByWorker />,
+  },
 ];
 
 const customerAppRoute = [
-  {
-    path: "/login/customer",
-    element: <CustomerLogin />,
-  },
-  {
-    path: "/signup/customer",
-    element: <CustomerSignup />,
-  },
-
   {
     path: "/customer-homescreen",
     element: <CustomerHomeScreen />,
@@ -103,6 +99,14 @@ const customerAppRoute = [
   {
     path: "/showServiceRequests",
     element: <ShowServiceRequests />,
+  },
+  {
+    path: "/showAcceptedJobPosting",
+    element: <ShowAcceptedJobPost />,
+  },
+  {
+    path: "/showConfirmedJobPostingByCustomer",
+    element: <ShowConfirmedJobPostingByCustomer />,
   },
   {
     path: "/showConfirmedRequests",
@@ -166,13 +170,42 @@ const commonAppRoute = [
     path: "/identityVerify",
     element: <IdentityVerify />,
   },
+  {
+    path: "/login/worker",
+    element: <Login />,
+  },
+  {
+    path: "/signup/worker",
+    element: <Signup />,
+  },
+  {
+    path: "/login/customer",
+    element: <CustomerLogin />,
+  },
+  {
+    path: "/signup/customer",
+    element: <CustomerSignup />,
+  },
 ];
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    children: [...commonAppRoute, ...workerAppRoute, ...customerAppRoute],
+    children: [
+      ...commonAppRoute,
+      // ...workerAppRoute,
+
+      {
+        element: <WorkerProtectedRoute />,
+        children: [...workerAppRoute],
+      },
+
+      {
+        element: <CustomerProtectedRoute />,
+        children: [...customerAppRoute],
+      },
+    ],
     errorElement: <Error />,
   },
 ]);

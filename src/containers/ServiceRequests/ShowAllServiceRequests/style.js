@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../../Constants/colors";
 
 export const StyledShowServiceRequests = styled.div`
-  background-color: ${colors.secondary};
+  background-color: f5efff;
   padding: 28px;
   min-height: 100vh; /* Ensure content takes up at least the full viewport height */
   position: relative;
@@ -15,8 +15,8 @@ export const StyledShowServiceRequests = styled.div`
 
   /* Service card container - responsive grid layout */
   .service-card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     padding-bottom: 100px;
     margin-bottom: 70px;

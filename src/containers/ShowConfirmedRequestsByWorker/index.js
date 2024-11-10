@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import ServiceRequestsCard from "../../../reusableComponents/ServiceRequestsCard";
-import { StyledShowServiceRequests } from "../ShowServiceRequests/style";
-import { getServiceRequests } from "../../../api/CustomerApi";
-import Home from "../../../assets/Home.png";
+import ServiceRequestsCard from "../../reusableComponents/ServiceRequestsCard";
+import { StyledShowServiceRequests } from "./style";
+import { getServiceRequests } from "../../api/CustomerApi";
+import Home from "../../assets/Home.png";
 
-const ShowConfirmedRequests = () => {
+const ShowConfirmedRequestsByWorker = () => {
   const navigate = useNavigate();
 
   const handleHome = () => {
@@ -35,7 +35,7 @@ const ShowConfirmedRequests = () => {
   return (
     <StyledShowServiceRequests>
       <div className="show-serviceRequest-header">
-        <h1>Confirmed Service Requests</h1>
+        <h1>Confirmed Service Requests By Worker</h1>
         <img src={Home} alt="" onClick={handleHome} className="home-screen" />
       </div>
 
@@ -56,4 +56,4 @@ const ShowConfirmedRequests = () => {
   );
 };
 
-export default ShowConfirmedRequests;
+export default ShowConfirmedRequestsByWorker;

@@ -7,7 +7,7 @@ import {
 import { colors } from "../../Constants/colors";
 
 export const StyledHomeScreen = styled.div`
-  background-color: ${colors.secondary};
+  background-color: #f4f6ff;
   width: 100vw; /* Full viewport width */
   height: 100%;
   padding: 12px 24px;
@@ -45,7 +45,7 @@ export const StyledHomeScreen = styled.div`
 
   /* Adjusted Promotion section */
   .promotion {
-    background-color: ${colors.primary};
+    background-color: #7a5eb3;
     width: 97%; /* Reduced width to prevent overflow */
     border-radius: 10px;
     color: white;
@@ -103,7 +103,9 @@ export const StyledHomeScreen = styled.div`
 
   .job-card-1,
   .job-card-2,
-  .job-card-3 {
+  .job-card-3,
+  .confirmed-jobs,
+  .action-button {
     background-color: #afecfe;
     font-size: 24px;
     border-radius: 10px;
@@ -137,6 +139,17 @@ export const StyledHomeScreen = styled.div`
     }
   }
 
+  /* Button styling */
+  .action-button {
+    background-color: #fecdcd;
+    border: none;
+  }
+
+  .confirmed-jobs {
+    background-color: #ffcff9;
+    border: none;
+  }
+
   /* Sticky navigation bar */
   .nav-items-list {
     display: flex;
@@ -153,17 +166,22 @@ export const StyledHomeScreen = styled.div`
   }
 
   img {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
+    width: 30px; /* Icon size */
+    height: 30px; /* Icon size */
+    cursor: pointer; /* Pointer cursor */
+  }
 
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
-      width: 40px;
+  /* Responsive styling for icons */
+  ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
+    img {
+      width: 40px; /* Larger icons for tablets */
       height: 40px;
     }
+  }
 
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.DESKTOP)} {
-      width: 50px;
+  ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.DESKTOP)} {
+    img {
+      width: 50px; /* Even larger icons for desktops */
       height: 50px;
     }
   }

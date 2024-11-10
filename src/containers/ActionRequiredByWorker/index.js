@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -6,10 +7,17 @@ import {
   confirmByWorker,
 } from "../../api/WorkerApi";
 import { StyledJobCard } from "../../reusableComponents/JobCard/style";
+import { StyledActionRequiredByWorker } from "./style";
+import Home from "../../assets/Home.png";
 
 const ActionRequiredByWorker = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { workerId } = location.state || {};
+
+  const handleHome = () => {
+    navigate("/homescreen");
+  };
 
   const [jobPostsState, setJobPostsState] = useState([]);
 
@@ -43,16 +51,12 @@ const ActionRequiredByWorker = () => {
     }
   };
 
-  if (!workerId) {
-    return <p>Worker ID is missing. Please try again later.</p>;
-  }
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading accepted job posts: {error.message}</p>;
-
   return (
-    <div>
-      <h2>Action Required By Worker</h2>
+    <StyledActionRequiredByWorker>
+      <div className="action-by-worker-header">
+        <h1>Action Required by Worker</h1>
+        <img src={Home} alt="" onClick={handleHome} className="homescreen" />
+      </div>
       {jobPostsState.length === 0 ? (
         <p>No accepted job postings found.</p>
       ) : (
@@ -62,13 +66,12 @@ const ActionRequiredByWorker = () => {
             style={{
               borderColor: jobPost.status === "Confirmed" ? "green" : "initial",
             }}
+            className="action-container"
           >
-            <div className="job-card-header">
-              <h2 className="job-card-title">{jobPost.job_title}</h2>
-            </div>
-            <p>Job Post ID: {jobPost.job_posting_id}</p>
+            {/* <p>Job Post ID: {jobPost.job_posting_id}</p> */}
+            <p>Job Title: {jobPost.job_posting_category}</p>
             <p>Accepted by: {jobPost.accepted_by_customer_name}</p>
-            <p>Customer Id: {jobPost.accepted_by_customer_id}</p>
+            {/* <p>Customer Id: {jobPost.accepted_by_customer_id}</p> */}
             <p>Customer Contact: {jobPost.accepted_by_customer_phone_number}</p>
 
             <div className="accept-reject-actions">
@@ -86,7 +89,7 @@ const ActionRequiredByWorker = () => {
           </StyledJobCard>
         ))
       )}
-    </div>
+    </StyledActionRequiredByWorker>
   );
 };
 

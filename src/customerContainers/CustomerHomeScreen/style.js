@@ -102,7 +102,9 @@ export const StyledCustomerHomeScreen = styled.div`
 
   .job-card-1,
   .job-card-2,
-  .job-card-3 {
+  .job-card-3,
+  .confirmed-jobs,
+  .action-button {
     background-color: #afecfe;
     font-size: 24px;
     border-radius: 10px;
@@ -134,6 +136,16 @@ export const StyledCustomerHomeScreen = styled.div`
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
       height: 180px;
     }
+  }
+
+  .action-button {
+    background-color: #fecdcd;
+    border: none;
+  }
+
+  .confirmed-jobs {
+    background-color: #ffcff9;
+    border: none;
   }
 
   /* Sticky navigation bar */

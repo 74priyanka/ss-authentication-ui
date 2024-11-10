@@ -34,6 +34,12 @@ export const StyledCreateServiceRequests = styled.div`
     }
   }
 
+  .home-screen {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+  }
+
   .create-service-header {
     font-size: 24px;
     margin-bottom: 16px;

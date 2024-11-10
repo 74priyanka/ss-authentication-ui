@@ -14,7 +14,7 @@ import homescreen from "../../../assets/homescreen.png";
 const WorkerProfile = () => {
   const navigate = useNavigate();
   // Retrieve the profile ID from session storage
-  const profileData = sessionStorage.getItem("profile"); // Assuming it's stored as a string
+  const profileData = localStorage.getItem("profile"); // Assuming it's stored as a string
   const profileId = JSON.parse(profileData).profileId;
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profileData", profileId], // Include profileId in the query key
@@ -26,12 +26,12 @@ const WorkerProfile = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   // Assuming the data is an object for a single profile
-  const profileName = data?.userName || "No Name Available";
+  const profileName = data?.name || "No Name Available";
 
   const handleLogout = async () => {
     const isLoggedOut = await workerLogout();
     if (isLoggedOut) {
-      navigate("/login/worker");
+      navigate("/login/worker", { replace: true });
     } else {
       console.error("Logout failed.Please try again");
     }

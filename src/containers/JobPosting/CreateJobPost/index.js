@@ -55,7 +55,7 @@ const CreateJobPost = () => {
     console.log("save button clicked");
 
     //get profileId from sessionStorage
-    const profile = JSON.parse(sessionStorage.getItem("profile"));
+    const profile = JSON.parse(localStorage.getItem("profile"));
 
     if (!profile || !profile.profileId) {
       console.error("User not logged in or profileId missing");

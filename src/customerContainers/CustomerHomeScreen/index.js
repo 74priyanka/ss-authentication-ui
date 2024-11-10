@@ -4,7 +4,7 @@ import profilePic from "../../assets/profilePic.png";
 import Buttons from "../../reusableComponents/Buttons";
 import { colors } from "../../Constants/colors";
 import jobHunt from "../../assets/jobHunt.png";
-import Add from "../../assets/Add.png";
+import Add from "../../assets/add.png";
 import Home from "../../assets/Home.png";
 import Chat from "../../assets/Chat.png";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const CustomerHomeScreen = () => {
   const navigate = useNavigate();
 
   // Retrieve CustomerProfile from sessionStorage
-  const customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  const customerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
   // Extract customerId from customerProfile
   const customerId = customerProfile?.customerProfileId;
 
@@ -41,13 +41,19 @@ const CustomerHomeScreen = () => {
     navigate("/showConfirmedRequests");
   };
 
+  const handleAcceptedJobPosting = () => {
+    navigate("/showAcceptedJobPosting");
+  };
+
+  const handleConfirmedJobPosting = () => {
+    navigate("/showConfirmedJobPostingByCustomer");
+  };
+
   return (
     <StyledCustomerHomeScreen className="home-screen">
       <header className="header">
         <h1>Welcome to customer screen</h1>
-        <h1 className="title">
-          Welcome <span>Priyanka Chauhan</span>
-        </h1>
+
         <img
           src={profilePic}
           alt=""
@@ -70,16 +76,22 @@ const CustomerHomeScreen = () => {
           <p>SERVICE REQUESTS</p>
           <p>POSTED BY ME</p>
         </div>
-        <div className="job-card-3">
-          <p>37.1kk</p>
-          <p>Part Time</p>
+        <div className="job-card-3" onClick={handleAcceptedJobPosting}>
+          Accepted Job Postings
         </div>
-        <button onClick={handleActionsRequired}>
-          show action required posts
-        </button>
-        <button onClick={handleConfirmedRequestsByWorker}>
-          show confirmed requests by customer
-        </button>
+        <div className="job-card-3" onClick={handleConfirmedJobPosting}>
+          Confirmed Job Postings
+        </div>
+        <div className="action-button" onClick={handleActionsRequired}>
+          <p>Action Required</p>
+          <p>Service Requests</p>
+        </div>
+        <div
+          className="confirmed-jobs"
+          onClick={handleConfirmedRequestsByWorker}
+        >
+          Confirmed Service Requests
+        </div>
       </div>
 
       <div className="nav-items-list">

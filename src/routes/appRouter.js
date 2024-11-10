@@ -27,136 +27,183 @@ import ActionRequiredByCustomer from "../customerContainers/ActionRequiredByCust
 import ActionRequiredByWorker from "../containers/ActionRequiredByWorker";
 import ShowConfirmedRequests from "../containers/ServiceRequests/ShowConfirmedRequests";
 import ShowConfirmedJobs from "../containers/JobPosting/ShowConfirmedJobs";
+import ShowConfirmedRequestsByWorker from "../containers/ShowConfirmedRequestsByWorker";
 
 //customer
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
 import CustomerLogin from "../customerContainers/CustomerLogin";
 import CustomerSignup from "../customerContainers/CustomerSignup";
+import WorkerProtectedRoute from "../protectedRoutes/WorkerProtectedRoute";
+import CustomerProtectedRoute from "../protectedRoutes/CustomerProtectedRoute";
+import ShowAcceptedServiceRequests from "../containers/ServiceRequests/ShowAcceptedServiceRequests";
+import ShowAcceptedJobPost from "../containers/JobPosting/ShowAcceptedJobPost";
+import ShowConfirmedJobPostingByCustomer from "../containers/ServiceRequests/ShowConfirmedJobPostingByCustomer";
+
+const workerAppRoute = [
+  {
+    path: "/homescreen",
+    element: <HomeScreen />,
+  },
+  {
+    path: "/workerProfile",
+    element: <WorkerProfile />,
+  },
+  {
+    path: "/createJobPost",
+    element: <CreateJobPost />,
+  },
+  {
+    path: "/editJobPost",
+    element: <CreateJobPost />,
+  },
+  {
+    path: "/showJobPost",
+    element: <ShowJobPost />,
+  },
+  {
+    path: "/actionByWorker",
+    element: <ActionRequiredByWorker />,
+  },
+  {
+    path: "/showConfirmedJobs",
+    element: <ShowConfirmedJobs />,
+  },
+  {
+    path: "/showAcceptedServiceRequests",
+    element: <ShowAcceptedServiceRequests />,
+  },
+  {
+    path: "/showConfirmedRequestsByWorker",
+    element: <ShowConfirmedRequestsByWorker />,
+  },
+];
+
+const customerAppRoute = [
+  {
+    path: "/customer-homescreen",
+    element: <CustomerHomeScreen />,
+  },
+
+  {
+    path: "/customerProfile",
+    element: <CustomerProfile />,
+  },
+  {
+    path: "/createServiceRequests",
+    element: <CreateServiceRequests />,
+  },
+  {
+    path: "/editServiceRequests",
+    element: <CreateServiceRequests />,
+  },
+  {
+    path: "/showServiceRequests",
+    element: <ShowServiceRequests />,
+  },
+  {
+    path: "/showAcceptedJobPosting",
+    element: <ShowAcceptedJobPost />,
+  },
+  {
+    path: "/showConfirmedJobPostingByCustomer",
+    element: <ShowConfirmedJobPostingByCustomer />,
+  },
+  {
+    path: "/showConfirmedRequests",
+    element: <ShowConfirmedRequests />,
+  },
+
+  {
+    path: "/actionByCustomer",
+    element: <ActionRequiredByCustomer />,
+  },
+];
+
+const commonAppRoute = [
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/launch",
+    element: <LaunchScreen />,
+  },
+
+  {
+    path: "/forgotPage",
+    element: <ForgotPage />,
+  },
+  {
+    path: "/emailPage",
+    element: <EmailPage />,
+  },
+  {
+    path: "/resetSuccessPage",
+    element: <ResetSuccessPage />,
+  },
+
+  {
+    path: "/aboutMe",
+    element: <AboutMe />,
+  },
+  {
+    path: "/work",
+    element: <WorkExperience />,
+  },
+  {
+    path: "/education",
+    element: <Education />,
+  },
+  {
+    path: "/skill",
+    element: <Skill />,
+  },
+  {
+    path: "/language",
+    element: <AddLanguages />,
+  },
+  {
+    path: "/certifications",
+    element: <Certifications />,
+  },
+  {
+    path: "/identityVerify",
+    element: <IdentityVerify />,
+  },
+  {
+    path: "/login/worker",
+    element: <Login />,
+  },
+  {
+    path: "/signup/worker",
+    element: <Signup />,
+  },
+  {
+    path: "/login/customer",
+    element: <CustomerLogin />,
+  },
+  {
+    path: "/signup/customer",
+    element: <CustomerSignup />,
+  },
+];
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
     children: [
+      ...commonAppRoute,
+      // ...workerAppRoute,
+
       {
-        path: "/",
-        element: <LandingPage />,
+        element: <WorkerProtectedRoute />,
+        children: [...workerAppRoute],
       },
+
       {
-        path: "/launch",
-        element: <LaunchScreen />,
-      },
-      {
-        path: "/login/worker",
-        element: <Login />,
-      },
-      {
-        path: "/signup/worker",
-        element: <Signup />,
-      },
-      {
-        path: "/login/customer",
-        element: <CustomerLogin />,
-      },
-      {
-        path: "/signup/customer",
-        element: <CustomerSignup />,
-      },
-      {
-        path: "/forgotPage",
-        element: <ForgotPage />,
-      },
-      {
-        path: "/emailPage",
-        element: <EmailPage />,
-      },
-      {
-        path: "/resetSuccessPage",
-        element: <ResetSuccessPage />,
-      },
-      {
-        path: "/homescreen",
-        element: <HomeScreen />,
-      },
-      {
-        path: "/customer-homescreen",
-        element: <CustomerHomeScreen />,
-      },
-      {
-        path: "/workerProfile",
-        element: <WorkerProfile />,
-      },
-      {
-        path: "/customerProfile",
-        element: <CustomerProfile />,
-      },
-      {
-        path: "/aboutMe",
-        element: <AboutMe />,
-      },
-      {
-        path: "/work",
-        element: <WorkExperience />,
-      },
-      {
-        path: "/education",
-        element: <Education />,
-      },
-      {
-        path: "/skill",
-        element: <Skill />,
-      },
-      {
-        path: "/language",
-        element: <AddLanguages />,
-      },
-      {
-        path: "/certifications",
-        element: <Certifications />,
-      },
-      {
-        path: "/identityVerify",
-        element: <IdentityVerify />,
-      },
-      {
-        path: "/createJobPost",
-        element: <CreateJobPost />,
-      },
-      {
-        path: "/editJobPost",
-        element: <CreateJobPost />,
-      },
-      {
-        path: "/showJobPost",
-        element: <ShowJobPost />,
-      },
-      {
-        path: "/createServiceRequests",
-        element: <CreateServiceRequests />,
-      },
-      {
-        path: "/editServiceRequests",
-        element: <CreateServiceRequests />,
-      },
-      {
-        path: "/showServiceRequests",
-        element: <ShowServiceRequests />,
-      },
-      {
-        path: "/showConfirmedRequests",
-        element: <ShowConfirmedRequests />,
-      },
-      {
-        path: "/showConfirmedJobs",
-        element: <ShowConfirmedJobs />,
-      },
-      {
-        path: "/actionByCustomer",
-        element: <ActionRequiredByCustomer />,
-      },
-      {
-        path: "/actionByWorker",
-        element: <ActionRequiredByWorker />,
+        element: <CustomerProtectedRoute />,
+        children: [...customerAppRoute],
       },
     ],
     errorElement: <Error />,

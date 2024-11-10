@@ -7,16 +7,18 @@ const useSignupHandler = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    userName: "",
+    name: "",
     email: "",
+    contact: "",
     password: "",
+    skills: [],
   });
 
   const workerMutation = useMutation({
     mutationFn: (credentials) => workerSignup(credentials),
     onSuccess: (data) => {
       console.log("worker signup successful :", data);
-      navigate("/homescreen");
+      navigate("/login/worker");
     },
     onError: (error) => {
       console.log("worker signup failed :", error);

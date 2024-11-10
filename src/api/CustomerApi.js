@@ -15,7 +15,7 @@ export const customerLogin = async (credentials) => {
     }
     const data = await response.json();
     console.log("data", data);
-    sessionStorage.setItem("CustomerProfile", JSON.stringify(data));
+    localStorage.setItem("CustomerProfile", JSON.stringify(data));
     return data;
   } catch (error) {
     console.error(error);
@@ -25,8 +25,8 @@ export const customerLogin = async (credentials) => {
 //function to handle customer logout
 export const customerLogout = async () => {
   try {
-    const token = sessionStorage.getItem("CustomerProfile")
-      ? JSON.parse(sessionStorage.getItem("CustomerProfile")).token
+    const token = localStorage.getItem("CustomerProfile")
+      ? JSON.parse(localStorage.getItem("CustomerProfile")).token
       : null;
     const response = await fetch(`${API_URL}/customers/logout`, {
       method: "POST",
@@ -39,8 +39,8 @@ export const customerLogout = async () => {
       throw new Error(response.statusText);
     }
 
-    //clear the session storage
-    sessionStorage.removeItem("CustomerProfile");
+    //clear the local storage
+    localStorage.removeItem("CustomerProfile");
     return true;
   } catch (error) {
     console.error("Logout failed : ", error);
@@ -103,10 +103,8 @@ export const fetchCustomerProfileData = async () => {
 
 export const createServiceRequests = async (createServiceData) => {
   try {
-    //get the customer's customerProfileId from sessionStorage
-    const CustomerProfile = JSON.parse(
-      sessionStorage.getItem("CustomerProfile")
-    );
+    //get the customer's customerProfileId from localStorage
+    const CustomerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
     const customerProfileId = CustomerProfile.customerProfileId;
 
     if (!CustomerProfile || !customerProfileId) {
@@ -281,14 +279,14 @@ export const fetchAllAcceptedServiceRequests = async (customerId) => {
 };
 
 //function to call API for accepting a worker job posting by a customer
-export const acceptJobPosting = async (customerId, jobListingId) => {
+export const acceptJobPosting = async (customerId, jobListingId, action) => {
   try {
     const response = await fetch(`${API_URL}/accept/byCustomer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ customerId, jobListingId }),
+      body: JSON.stringify({ customerId, jobListingId, action }),
     });
     const data = await response.json();
     if (response.ok) {

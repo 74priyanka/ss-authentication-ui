@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../Constants/colors";
+import { colors } from "../../Constants/colors";
 
 export const StyledShowServiceRequests = styled.div`
   background-color: #f5efff;

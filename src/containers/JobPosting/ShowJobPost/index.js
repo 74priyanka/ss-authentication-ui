@@ -4,16 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import JobCard from "../../../reusableComponents/JobCard";
 import { StyledShowJobPost } from "./style";
 import { getJobListingsByWorker } from "../../../api/WorkerApi";
-import profilePic from "../../../assets/profilePic.png";
+import Home from "../../../assets/Home.png";
 
 const ShowJobPost = () => {
   const navigate = useNavigate();
 
-  // Get the worker's profileId from sessionStorage (this is the userId)
+  // Get the worker's profileId from localStorage (this is the userId)
 
-  const profile = JSON.parse(sessionStorage.getItem("profile"));
+  const profile = JSON.parse(localStorage.getItem("profile"));
   const handleCreate = () => {
     navigate("/createJobPost");
+  };
+  const handleHome = () => {
+    navigate("/homescreen");
   };
 
   const {
@@ -28,20 +31,11 @@ const ShowJobPost = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading job listings: {error.message}</p>;
 
-  const handleProfile = () => {
-    navigate("/workerProfile");
-  };
-
   return (
     <StyledShowJobPost>
       <div className="show-jobpost-header">
         <h1>Job Postings</h1>
-        <img
-          src={profilePic}
-          alt=""
-          className="profile-pic"
-          onClick={handleProfile}
-        />
+        <img src={Home} alt="" className="homescreen" onClick={handleHome} />
       </div>
 
       <div className="job-card-container">

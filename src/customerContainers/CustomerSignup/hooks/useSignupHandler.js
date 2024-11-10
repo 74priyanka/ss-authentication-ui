@@ -8,8 +8,9 @@ const useSignupHandler = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    userName: "",
+    name: "",
     email: "",
+    contact: "",
     password: "",
   });
 
@@ -17,7 +18,7 @@ const useSignupHandler = () => {
     mutationFn: (credentials) => customerSignup(credentials),
     onSuccess: (data) => {
       console.log("customer signup successful:", data);
-      navigate("/customer-homescreen");
+      navigate("/login/customer");
     },
     onError: (error) => {
       console.error("customer signup failed:", error);

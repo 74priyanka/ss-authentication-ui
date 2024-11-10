@@ -73,7 +73,6 @@ export const StyledShowJobPost = styled.div`
 
   button {
     position: relative;
-    left: 50%;
     transform: translateX(-50%);
     background-color: ${colors.primary_btn_bg};
     color: ${colors.primary_btn_label};

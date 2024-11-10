@@ -11,9 +11,20 @@ const LandingPage = () => {
   };
   return (
     <StyledLandingPage className="styled-landing-page">
-      <div className="logo" onClick={handleLaunchScreen}>
-        <img src={LogoImage} alt="logoimage" className="logo-image" />
-        <p>SkillSync</p>
+      <div className="logo">
+        <img
+          src={LogoImage}
+          alt="logoimage"
+          className="logo-image"
+          onClick={handleLaunchScreen}
+        />
+        <p className="logo-text" onClick={handleLaunchScreen}>
+          SkillSync
+        </p>
+        <p className="tagline" onClick={handleLaunchScreen}>
+          Where needs meet skills-connect, book, and get things done with
+          SkillSync
+        </p>
       </div>
     </StyledLandingPage>
   );

@@ -7,6 +7,7 @@ import { useDeleteJobPostHandler } from "../../containers/JobPosting/ShowJobPost
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../ConfirmationModal";
 import { acceptJobPosting } from "../../api/CustomerApi";
+import { STATUS } from "../../Constants/appConstant";
 
 const JobCard = ({ job, isShowJobPosting }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -17,7 +18,7 @@ const JobCard = ({ job, isShowJobPosting }) => {
   const optionsRef = useRef(null);
 
   // Retrieve CustomerProfile from sessionStorage
-  const customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+  const customerProfile = JSON.parse(localStorage.getItem("CustomerProfile"));
   // Extract customerId from customerProfile
   const customerId = customerProfile?.customerProfileId;
   const jobListingId = job._id;
@@ -31,20 +32,30 @@ const JobCard = ({ job, isShowJobPosting }) => {
   }, [jobListingId]);
 
   // Function to handle acceptance of job posting
-  const handleAccept = async () => {
+  const handleAcceptAndReject = async (buttonAction) => {
     console.log("Customer ID:", customerId);
     console.log("Job Listing ID:", jobListingId);
     try {
-      await acceptJobPosting(customerId, jobListingId);
+      await acceptJobPosting(customerId, jobListingId, buttonAction);
       console.log("Job Posting accepted successfully");
 
       // Update localStorage
-      const acceptedJobs =
-        JSON.parse(localStorage.getItem("acceptedJobs")) || {};
-      acceptedJobs[jobListingId] = true; // Mark as accepted
-      localStorage.setItem("acceptedJobs", JSON.stringify(acceptedJobs));
 
-      setIsAccepted(true); // Update the accepted state
+      if (buttonAction === STATUS.ACCEPTED) {
+        const acceptedJobs =
+          JSON.parse(localStorage.getItem("acceptedJobs")) || {};
+        acceptedJobs[jobListingId] = true; // Mark as accepted
+        localStorage.setItem("acceptedJobs", JSON.stringify(acceptedJobs));
+
+        setIsAccepted(true); // Update the accepted state
+      }
+
+      if (buttonAction === STATUS.PENDING) {
+        const acceptedJobs =
+          JSON.parse(localStorage.getItem("acceptedJobs")) || {};
+        delete acceptedJobs[jobListingId];
+        localStorage.setItem("acceptedJobs", JSON.stringify(acceptedJobs));
+      }
     } catch (error) {
       console.error("Error accepting job posting:", error);
     }
@@ -132,15 +143,20 @@ const JobCard = ({ job, isShowJobPosting }) => {
           onConfirm={handleDelete} // Confirm deletion
         />
       ) : (
-        <div className={`accept action ${isAccepted ? "disabled" : ""}`}>
+        <div className="accept-reject-actions">
           <button
-            className="accept action"
-            onClick={handleAccept}
+            className={`action ${isAccepted ? "disabled" : "accept"}`}
+            onClick={() => handleAcceptAndReject(STATUS.ACCEPTED)}
             disabled={isAccepted}
           >
             ACCEPT
           </button>
-          <button className="reject action">REJECT</button>
+          <button
+            className="reject action"
+            onClick={() => handleAcceptAndReject(STATUS.PENDING)}
+          >
+            REJECT
+          </button>
         </div>
       )}
     </StyledJobCard>

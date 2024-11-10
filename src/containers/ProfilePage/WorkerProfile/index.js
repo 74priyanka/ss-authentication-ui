@@ -26,12 +26,12 @@ const WorkerProfile = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   // Assuming the data is an object for a single profile
-  const profileName = data?.userName || "No Name Available";
+  const profileName = data?.name || "No Name Available";
 
   const handleLogout = async () => {
     const isLoggedOut = await workerLogout();
     if (isLoggedOut) {
-      navigate("/login/worker");
+      navigate("/login/worker", { replace: true });
     } else {
       console.error("Logout failed.Please try again");
     }

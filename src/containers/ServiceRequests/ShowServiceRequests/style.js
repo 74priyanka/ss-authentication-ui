@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../../Constants/colors";
 
 export const StyledShowServiceRequests = styled.div`
-  background-color: ${colors.secondary};
+  background-color: #f5efff;
   padding: 28px;
   min-height: 100vh; /* Ensure content takes up at least the full viewport height */
   position: relative;
@@ -13,7 +13,9 @@ export const StyledShowServiceRequests = styled.div`
     margin-bottom: 20px;
   }
 
-  .profile-pic {
+  .home-screen {
+    height: 32px;
+    width: 32px;
     cursor: pointer;
   }
 
@@ -25,8 +27,8 @@ export const StyledShowServiceRequests = styled.div`
 
   /* Service card container - responsive grid layout */
   .service-card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     padding-bottom: 100px;
     margin-bottom: 70px;
@@ -65,20 +67,12 @@ export const StyledShowServiceRequests = styled.div`
     outline: none;
   }
 
-  /* Media Queries for responsiveness */
-  @media (max-width: 1024px) {
-    .service-card-container {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-    }
+  .service-card-container {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   @media (max-width: 768px) {
-    .service-card-container {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
     button {
       font-size: 18px;
       padding: 10px;
@@ -86,11 +80,6 @@ export const StyledShowServiceRequests = styled.div`
   }
 
   @media (max-width: 480px) {
-    .service-card-container {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
     button {
       font-size: 16px;
       padding: 8px;

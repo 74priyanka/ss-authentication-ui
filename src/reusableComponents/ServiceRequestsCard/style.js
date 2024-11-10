@@ -1,5 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../Constants/colors";
+
+const scaleUp = keyframes`
+from {
+  transform: scale(1);
+}
+to {
+  transform: scale(1.05);
+}
+`;
 
 export const StyledServiceRequestsCard = styled.div`
   border: 2px solid ${colors.border || "#e0e0e0"};
@@ -10,6 +19,7 @@ export const StyledServiceRequestsCard = styled.div`
   background-color: ${colors.cardBackground || "#fff"};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  width: 100%;
 
   &:hover {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -195,5 +205,16 @@ export const StyledServiceRequestsCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      transition: box-shadow 0.5s ease;
+      box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.15);
+      /* animation: ${scaleUp} 0.3s ease-in-out forwards; */
+    }
+
+    transition: transform 0.3s ease-in-out;
   }
 `;

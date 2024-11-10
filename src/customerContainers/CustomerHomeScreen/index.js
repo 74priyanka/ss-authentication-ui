@@ -4,7 +4,7 @@ import profilePic from "../../assets/profilePic.png";
 import Buttons from "../../reusableComponents/Buttons";
 import { colors } from "../../Constants/colors";
 import jobHunt from "../../assets/jobHunt.png";
-import Add from "../../assets/Add.png";
+import Add from "../../assets/add.png";
 import Home from "../../assets/Home.png";
 import Chat from "../../assets/Chat.png";
 import { useNavigate } from "react-router-dom";
@@ -45,9 +45,7 @@ const CustomerHomeScreen = () => {
     <StyledCustomerHomeScreen className="home-screen">
       <header className="header">
         <h1>Welcome to customer screen</h1>
-        <h1 className="title">
-          Welcome <span>Priyanka Chauhan</span>
-        </h1>
+
         <img
           src={profilePic}
           alt=""
@@ -74,12 +72,16 @@ const CustomerHomeScreen = () => {
           <p>37.1kk</p>
           <p>Part Time</p>
         </div>
-        <button onClick={handleActionsRequired}>
-          show action required posts
-        </button>
-        <button onClick={handleConfirmedRequestsByWorker}>
-          show confirmed requests by customer
-        </button>
+        <div className="action-button" onClick={handleActionsRequired}>
+          <p>Action Required</p>
+          <p>Service Requests</p>
+        </div>
+        <div
+          className="confirmed-jobs"
+          onClick={handleConfirmedRequestsByWorker}
+        >
+          Confirmed Service Requests
+        </div>
       </div>
 
       <div className="nav-items-list">

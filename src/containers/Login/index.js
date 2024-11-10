@@ -28,7 +28,7 @@ const Login = () => {
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
-        backgroundColor={colors.input_bg}
+        backgroundColor={colors.secondary_btn_bg}
       />
       <Inputs
         type="Password"
@@ -38,7 +38,7 @@ const Login = () => {
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
-        backgroundColor={colors.input_bg}
+        backgroundColor={colors.secondary_btn_bg}
       />
       <div className="forgot-password">
         <label class="checkbox-label">

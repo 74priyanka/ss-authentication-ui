@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../../Constants/colors";
 
 export const StyledShowJobPost = styled.div`
-  background-color: ${colors.secondary};
+  background-color: #eee5fb;
   padding: 28px;
   height: 100vh; /* Use viewport height */
   position: relative; /* Ensure fixed button is within the container */
@@ -10,6 +10,12 @@ export const StyledShowJobPost = styled.div`
 
   h1 {
     text-align: center;
+  }
+
+  .homescreen {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
   }
 
   .show-jobpost-header {

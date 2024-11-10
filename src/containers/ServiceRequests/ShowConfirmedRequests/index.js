@@ -4,9 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import ServiceRequestsCard from "../../../reusableComponents/ServiceRequestsCard";
 import { StyledShowServiceRequests } from "../ShowServiceRequests/style";
 import { getServiceRequests } from "../../../api/CustomerApi";
+import Home from "../../../assets/Home.png";
 
 const ShowConfirmedRequests = () => {
   const navigate = useNavigate();
+
+  const handleHome = () => {
+    navigate("/customer-homescreen");
+  };
 
   const {
     data: serviceRequests,
@@ -28,8 +33,12 @@ const ShowConfirmedRequests = () => {
   );
 
   return (
-    <StyledShowServiceRequests className="container">
-      <h1>Confirmed Service Requests</h1>
+    <StyledShowServiceRequests>
+      <div className="show-serviceRequest-header">
+        <h1>Confirmed Service Requests</h1>
+        <img src={Home} alt="" onClick={handleHome} className="home-screen" />
+      </div>
+
       <div className="service-card-container">
         {confirmedRequests.length > 0 ? (
           confirmedRequests.map((service) => (

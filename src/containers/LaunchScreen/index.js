@@ -20,17 +20,11 @@ const LaunchScreen = () => {
   return (
     <StyledLaunchScreen className="styled-launch-screen">
       <p className="app-title">SkillSync</p>
-      <img src={splashImage} alt="" className="splash-image" />
-      <div className="job-tagline">
-        Find your
-        <span>Dream Job</span>
-        Here !
-      </div>
+      <img src={splashImage} alt="SkillSync Splash" className="splash-image" />
+
       <div className="explore-description">
-        <p>
-          Explore all the most exciting job roles based on your interest and
-          study major.
-        </p>
+        <p>Explore all the most exciting job roles based on your interest</p>
+        <p>and services based on your needs</p>
       </div>
 
       <div className="button-container">

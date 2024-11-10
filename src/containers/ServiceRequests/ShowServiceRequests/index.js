@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import ServiceRequestsCard from "../../../reusableComponents/ServiceRequestsCard";
 import { StyledShowServiceRequests } from "./style";
 import { getServiceRequestsByCustomer } from "../../../api/CustomerApi";
-import profilePic from "../../../assets/profilePic.png";
+import Home from "../../../assets/Home.png";
 
 const ShowServiceRequests = () => {
   const navigate = useNavigate();
@@ -15,8 +15,8 @@ const ShowServiceRequests = () => {
     navigate("/createServiceRequests");
   };
 
-  const handleProfile = () => {
-    navigate("/customerProfile");
+  const handleHome = () => {
+    navigate("/customer-homescreen");
   };
 
   const {
@@ -32,20 +32,15 @@ const ShowServiceRequests = () => {
   console.log("service requests", serviceRequests?.data);
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading job listings: {error.message}</p>;
+  if (error) return <p>Error loading service request: {error.message}</p>;
 
   return (
     <StyledShowServiceRequests>
       <div className="show-serviceRequest-header">
         <h1>Service Requests</h1>
-        <img
-          src={profilePic}
-          alt=""
-          className="profile-pic"
-          onClick={handleProfile}
-        />
+        <img src={Home} alt="" onClick={handleHome} className="home-screen" />
       </div>
-      <h1>Service Requests</h1>
+
       <div className="service-card-container">
         {serviceRequests?.data.map((service) => (
           <ServiceRequestsCard

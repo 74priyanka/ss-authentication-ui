@@ -1,9 +1,31 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   LAYOUT_MEDIA_QUERY_BREAKPOINTS,
   mediaQuery,
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
+
+// Keyframes for animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
+
 export const StyledLaunchScreen = styled.div`
   background-color: ${colors.secondary};
   width: 100%;
@@ -12,152 +34,77 @@ export const StyledLaunchScreen = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-
   align-items: center;
-  position: relative; /* Ensure relative positioning for absolute child elements */
+  position: relative;
+  animation: ${fadeIn} 1s ease-in-out;
 
   .app-title {
     font-size: 52px;
     font-weight: 700;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    /* position: absolute; */
+    right: 0px;
     margin: 0;
+    animation: ${fadeIn} 1s ease-in-out;
 
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
+    ${mediaQuery("MOBILE_SMALL")} {
       font-size: 24px;
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
+    ${mediaQuery("MOBILE_MEDIUM")} {
       font-size: 32px;
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {
-      font-size: 36px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.SMALL_TABLET)} {
-      font-size: 40px;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
+    ${mediaQuery("TABLET")} {
       font-size: 44px;
     }
   }
 
   .splash-image {
-    position: absolute;
-    top: 30%;
+    /* position: absolute; */
+    top: 20%; /* Adjusted top position */
     transform: translateY(-50%);
+    animation: ${float} 3s ease-in-out infinite;
 
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
-      width: 220px;
-      height: auto;
+    ${mediaQuery("MOBILE_SMALL")} {
+      width: 160px;
+      top: 15%; /* Adjusted top position for smaller screens */
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
-      width: 260px;
-      height: auto;
+    ${mediaQuery("MOBILE_MEDIUM")} {
+      width: 240px; /* Adjusted width for medium screens */
+      top: 20%; /* Further adjusted top position */
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {
-      width: 280px;
-      height: auto;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.SMALL_TABLET)} {
-      width: 300px;
-      height: auto;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
+    ${mediaQuery("TABLET")} {
       width: 320px;
-      height: auto;
-      top: 35%;
+      top: 25%; /* Adjusted top position for tablets */
     }
-  }
-
-  .job-tagline {
-    font-size: 52px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    left: 20px;
-    bottom: 24%;
-    font-weight: 700;
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
-      font-size: 30px;
-      bottom: 38%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
-      font-size: 34px;
-      bottom: 32%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {
-      font-size: 36px;
-      bottom: 28%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.SMALL_TABLET)} {
-      font-size: 40px;
-      bottom: 24%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
-      font-size: 44px;
-      bottom: 20%;
-    }
-  }
-
-  span {
-    color: #fca34d;
-    text-decoration: underline;
   }
 
   .explore-description {
     color: #524b6b;
-    position: absolute;
-
-    margin: 0;
-    bottom: 12%;
+    /* position: absolute; */
+    bottom: 20%; /* Increased bottom margin to create more space */
     font-size: 30px;
+    margin: 0;
+    animation: ${fadeIn} 1.2s ease-in-out;
 
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
+    ${mediaQuery("MOBILE_SMALL")} {
       font-size: 18px;
-      bottom: 22%;
+      bottom: 25%; /* Adjusted bottom position for smaller screens */
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_MEDIUM)} {
-      font-size: 24px;
-      bottom: 15%;
-      margin: 5px;
+    ${mediaQuery("MOBILE_MEDIUM")} {
+      font-size: 24px; /* Adjusted font size for medium screens */
+      bottom: 15%; /* Further adjusted bottom position */
     }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_LARGE)} {
-      font-size: 24px;
-      bottom: 14%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.SMALL_TABLET)} {
-      font-size: 28px;
-      bottom: 10%;
-    }
-
-    ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.TABLET)} {
+    ${mediaQuery("TABLET")} {
       font-size: 26px;
-      bottom: 9%;
+      bottom: 12%; /* Adjusted bottom position for tablets */
     }
   }
 
   .button-container {
     display: flex;
     gap: 20px;
-    margin-top: auto; /* Pushes the buttons to the bottom of the container */
-    margin-bottom: 20px; /* Adjust space between buttons and bottom of the container */
+    margin-top: auto;
+    margin-bottom: 20px;
     width: 100%;
+    justify-content: center;
   }
 `;

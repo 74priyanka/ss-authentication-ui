@@ -27,7 +27,7 @@ const ShowAllServiceRequests = () => {
   if (error) return <p>Error loading job listings: {error.message}</p>;
 
   return (
-    <StyledShowServiceRequests className="container">
+    <StyledShowServiceRequests>
       <h1>Service Requests By Customers</h1>
       <div className="service-card-container">
         {pendingRequests.length > 0 ? (
@@ -36,6 +36,7 @@ const ShowAllServiceRequests = () => {
               key={service._id}
               service={service}
               isShowServiceRequest={false}
+              className="service-card"
             />
           ))
         ) : (

@@ -32,133 +32,147 @@ import ShowConfirmedJobs from "../containers/JobPosting/ShowConfirmedJobs";
 import CustomerHomeScreen from "../customerContainers/CustomerHomeScreen";
 import CustomerLogin from "../customerContainers/CustomerLogin";
 import CustomerSignup from "../customerContainers/CustomerSignup";
+import WorkerProtectedRoute from "../protectedRoutes/WorkerProtectedRoute";
+
+const workerAppRoute = [
+  {
+    path: "/login/worker",
+    element: <Login />,
+  },
+  {
+    path: "/signup/worker",
+    element: <Signup />,
+  },
+  {
+    path: "/homescreen",
+    element: <HomeScreen />,
+  },
+  {
+    path: "/workerProfile",
+    element: <WorkerProfile />,
+  },
+  {
+    path: "/createJobPost",
+    element: <CreateJobPost />,
+  },
+  {
+    path: "/editJobPost",
+    element: <CreateJobPost />,
+  },
+  {
+    path: "/showJobPost",
+    element: <ShowJobPost />,
+  },
+  {
+    path: "/actionByWorker",
+    element: <ActionRequiredByWorker />,
+  },
+  {
+    path: "/showConfirmedJobs",
+    element: <ShowConfirmedJobs />,
+  },
+];
+
+const customerAppRoute = [
+  {
+    path: "/login/customer",
+    element: <CustomerLogin />,
+  },
+  {
+    path: "/signup/customer",
+    element: <CustomerSignup />,
+  },
+
+  {
+    path: "/customer-homescreen",
+    element: <CustomerHomeScreen />,
+  },
+
+  {
+    path: "/customerProfile",
+    element: <CustomerProfile />,
+  },
+  {
+    path: "/createServiceRequests",
+    element: <CreateServiceRequests />,
+  },
+  {
+    path: "/editServiceRequests",
+    element: <CreateServiceRequests />,
+  },
+  {
+    path: "/showServiceRequests",
+    element: <ShowServiceRequests />,
+  },
+  {
+    path: "/showConfirmedRequests",
+    element: <ShowConfirmedRequests />,
+  },
+
+  {
+    path: "/actionByCustomer",
+    element: <ActionRequiredByCustomer />,
+  },
+];
+
+const commonAppRoute = [
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/launch",
+    element: <LaunchScreen />,
+  },
+
+  {
+    path: "/forgotPage",
+    element: <ForgotPage />,
+  },
+  {
+    path: "/emailPage",
+    element: <EmailPage />,
+  },
+  {
+    path: "/resetSuccessPage",
+    element: <ResetSuccessPage />,
+  },
+
+  {
+    path: "/aboutMe",
+    element: <AboutMe />,
+  },
+  {
+    path: "/work",
+    element: <WorkExperience />,
+  },
+  {
+    path: "/education",
+    element: <Education />,
+  },
+  {
+    path: "/skill",
+    element: <Skill />,
+  },
+  {
+    path: "/language",
+    element: <AddLanguages />,
+  },
+  {
+    path: "/certifications",
+    element: <Certifications />,
+  },
+  {
+    path: "/identityVerify",
+    element: <IdentityVerify />,
+  },
+];
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <LandingPage />,
-      },
-      {
-        path: "/launch",
-        element: <LaunchScreen />,
-      },
-      {
-        path: "/login/worker",
-        element: <Login />,
-      },
-      {
-        path: "/signup/worker",
-        element: <Signup />,
-      },
-      {
-        path: "/login/customer",
-        element: <CustomerLogin />,
-      },
-      {
-        path: "/signup/customer",
-        element: <CustomerSignup />,
-      },
-      {
-        path: "/forgotPage",
-        element: <ForgotPage />,
-      },
-      {
-        path: "/emailPage",
-        element: <EmailPage />,
-      },
-      {
-        path: "/resetSuccessPage",
-        element: <ResetSuccessPage />,
-      },
-      {
-        path: "/homescreen",
-        element: <HomeScreen />,
-      },
-      {
-        path: "/customer-homescreen",
-        element: <CustomerHomeScreen />,
-      },
-      {
-        path: "/workerProfile",
-        element: <WorkerProfile />,
-      },
-      {
-        path: "/customerProfile",
-        element: <CustomerProfile />,
-      },
-      {
-        path: "/aboutMe",
-        element: <AboutMe />,
-      },
-      {
-        path: "/work",
-        element: <WorkExperience />,
-      },
-      {
-        path: "/education",
-        element: <Education />,
-      },
-      {
-        path: "/skill",
-        element: <Skill />,
-      },
-      {
-        path: "/language",
-        element: <AddLanguages />,
-      },
-      {
-        path: "/certifications",
-        element: <Certifications />,
-      },
-      {
-        path: "/identityVerify",
-        element: <IdentityVerify />,
-      },
-      {
-        path: "/createJobPost",
-        element: <CreateJobPost />,
-      },
-      {
-        path: "/editJobPost",
-        element: <CreateJobPost />,
-      },
-      {
-        path: "/showJobPost",
-        element: <ShowJobPost />,
-      },
-      {
-        path: "/createServiceRequests",
-        element: <CreateServiceRequests />,
-      },
-      {
-        path: "/editServiceRequests",
-        element: <CreateServiceRequests />,
-      },
-      {
-        path: "/showServiceRequests",
-        element: <ShowServiceRequests />,
-      },
-      {
-        path: "/showConfirmedRequests",
-        element: <ShowConfirmedRequests />,
-      },
-      {
-        path: "/showConfirmedJobs",
-        element: <ShowConfirmedJobs />,
-      },
-      {
-        path: "/actionByCustomer",
-        element: <ActionRequiredByCustomer />,
-      },
-      {
-        path: "/actionByWorker",
-        element: <ActionRequiredByWorker />,
-      },
-    ],
+    children: [...commonAppRoute, ...workerAppRoute, ...customerAppRoute],
     errorElement: <Error />,
   },
 ]);

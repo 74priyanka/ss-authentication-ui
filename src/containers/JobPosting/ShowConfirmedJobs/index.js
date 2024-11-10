@@ -4,9 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import JobCard from "../../../reusableComponents/JobCard"; // Import the JobCard component for displaying job details
 import { StyledShowJobPost } from "../ShowJobPost/style"; // Import the styled component for layout and styling
 import { getJobListings } from "../../../api/WorkerApi"; // Import the API function to fetch job listings
+import Home from "../../../assets/Home.png";
 
 const ShowConfirmedJobs = () => {
   const navigate = useNavigate(); // Initialize the navigate function for navigation purposes
+
+  const handleHome = () => {
+    navigate("/homescreen");
+  };
 
   // Fetch job listings using react-query
   const {
@@ -30,7 +35,11 @@ const ShowConfirmedJobs = () => {
 
   return (
     <StyledShowJobPost>
-      <h1>Confirmed Job Postings</h1>
+      <div className="show-jobpost-header">
+        <h1>Confirmed Job Postings</h1>
+        <img src={Home} alt="" onClick={handleHome} className="homescreen" />
+      </div>
+
       <div className="job-card-container">
         {confirmedJobs.length > 0 ? (
           confirmedJobs.map((job) => (

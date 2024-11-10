@@ -10,7 +10,7 @@ import DatePicker from "../../../reusableComponents/DatePicker";
 import { useCreateServiceRequestsHandler } from "./hooks/useCreateServiceRequestsHandler";
 import { useUpdateServiceRequestsHandler } from "../ShowServiceRequests/hooks/useUpdateServiceRequestsHandler";
 import { useNavigate, useLocation } from "react-router-dom";
-import profilePic from "../../../assets/profilePic.png";
+import Home from "../../../assets/Home.png";
 
 const CreateServiceRequests = () => {
   const navigate = useNavigate();
@@ -106,8 +106,9 @@ const CreateServiceRequests = () => {
   const handleRemove = () => {
     navigate("/customer-homescreen");
   };
-  const handleProfile = () => {
-    navigate("/customerProfile");
+
+  const handleHome = () => {
+    navigate("/customer-homescreen");
   };
 
   return (
@@ -122,12 +123,7 @@ const CreateServiceRequests = () => {
         <h2 className="create-service-header">
           {service ? "Edit Service Request" : "Create New Service Request"}
         </h2>
-        <img
-          src={profilePic}
-          alt=""
-          className="profile-pic"
-          onClick={handleProfile}
-        />
+        <img src={Home} alt="" onClick={handleHome} className="home-screen" />
       </div>
       <div className="input containers">
         <Inputs

@@ -6,8 +6,9 @@ export const handleInputChange = (e, setFormData) => {
   }));
 };
 
-export const handleLogin = (workerMutation, formData, navigate) => {
-  workerMutation.mutate(formData);
+export const handleLogin = async (workerMutation, formData, navigate) => {
+  await workerMutation.mutate(formData);
+  console.log("handle login : ");
   navigate("/homescreen");
 };
 

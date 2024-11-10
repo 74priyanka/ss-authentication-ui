@@ -5,7 +5,7 @@ import {
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
 export const StyledSignup = styled.div`
-  background-color: ${colors.secondary};
+  background-color: #f4f6ff;
   width: calc(100% - 48px);
   height: calc(100% - 24px);
   padding: 12px 24px;
@@ -173,5 +173,91 @@ export const StyledSignup = styled.div`
     width: 100%;
     max-width: 400px;
     margin-bottom: 16px;
+  }
+
+  .skills-container {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .skills-heading {
+    font-size: 14px;
+    color: ${colors.input_label_text};
+    margin-bottom: 4px;
+  }
+
+  .skills-input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: ${colors.input_bg};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .arrow {
+    display: inline-block;
+    margin-left: 8px;
+    width: 8px;
+    height: 8px;
+    border: solid ${colors.input_label_text};
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+  }
+
+  .arrow.open {
+    transform: rotate(-135deg);
+  }
+
+  .skills {
+    display: inline-flex;
+    align-items: center;
+    background-color: ${colors.primary_btn_bg};
+    color: ${colors.primary_btn_label};
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 4px 4px 0 0;
+    font-size: 14px;
+  }
+
+  .remove-btn {
+    margin-left: 8px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .skills-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    z-index: 1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .skill-item {
+    padding: 8px;
+    cursor: pointer;
+    color: ${colors.input_label_text};
+    background-color: #fff;
+    transition: background-color 0.2s ease;
+  }
+
+  .skill-item:hover {
+    background-color: ${colors.input_bg};
   }
 `;

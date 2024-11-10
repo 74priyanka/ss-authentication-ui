@@ -38,21 +38,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "ss_authentication_ui",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./WorkerAuthUI": "./src/components/WorkerAuthUI",
-        "./CustomerAuthUI": "./src/components/CustomerAuthUI",
-      },
-      remotes: {
-        designComponents:
-          "ss_design_components@http://localhost:3002/remoteEntry.js",
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-  ],
 };

@@ -5,7 +5,7 @@ import {
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
 export const StyledLogin = styled.div`
-  background-color: ${colors.secondary};
+  background-color: #f4f6ff;
   width: calc(100% - 48px);
   height: calc(100% - 24px);
   padding: 12px 24px;

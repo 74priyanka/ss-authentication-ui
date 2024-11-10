@@ -1,9 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   LAYOUT_MEDIA_QUERY_BREAKPOINTS,
   mediaQuery,
 } from "../../Constants/breakpoints";
 import { colors } from "../../Constants/colors";
+
+const scaleUp = keyframes`
+from {
+  transform: scale(1);
+}
+to {
+  transform: scale(1.05);
+}
+`;
 
 export const StyledButton = styled.div`
   width: 72%;
@@ -40,7 +49,10 @@ export const StyledButton = styled.div`
       cursor: pointer;
       transition: box-shadow 0.5s ease;
       box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.15);
+      animation: ${scaleUp} 0.3s ease-in-out forwards;
     }
+
+    transition: transform 0.3s ease-in-out;
 
     ${mediaQuery(LAYOUT_MEDIA_QUERY_BREAKPOINTS.MOBILE_SMALL)} {
       font-size: 14px;

@@ -1,5 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../Constants/colors";
+
+const scaleUp = keyframes`
+from {
+  transform: scale(1);
+}
+to {
+  transform: scale(1.05);
+}
+`;
 
 export const StyledJobCard = styled.div`
   border: 2px solid ${colors.border || "#e0e0e0"};
@@ -112,5 +121,15 @@ export const StyledJobCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      transition: box-shadow 0.5s ease;
+      box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.15);
+      animation: ${scaleUp} 0.3s ease-in-out forwards;
+    }
+
+    transition: transform 0.3s ease-in-out;
   }
 `;

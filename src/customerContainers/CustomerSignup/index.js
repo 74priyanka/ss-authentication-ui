@@ -25,7 +25,7 @@ const CustomerSignup = () => {
       <Inputs
         type="text"
         label="FullName"
-        name="userName"
+        name="name"
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}
@@ -35,6 +35,15 @@ const CustomerSignup = () => {
         type="text"
         label="Email"
         name="email"
+        onChange={(e) => handleInputChange(e, setFormData)}
+        labelColor={colors.input_label_text}
+        inputColor={colors.input_label_text}
+        backgroundColor={colors.input_bg}
+      />
+      <Inputs
+        type="number"
+        label="Contact"
+        name="contact"
         onChange={(e) => handleInputChange(e, setFormData)}
         labelColor={colors.input_label_text}
         inputColor={colors.input_label_text}

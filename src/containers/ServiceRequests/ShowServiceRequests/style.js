@@ -6,7 +6,7 @@ export const StyledShowServiceRequests = styled.div`
   padding: 28px;
   min-height: 100vh; /* Ensure content takes up at least the full viewport height */
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   h1 {
     text-align: center;
@@ -27,10 +27,17 @@ export const StyledShowServiceRequests = styled.div`
 
   /* Service card container - responsive grid layout */
   .service-card-container {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
     gap: 16px;
     padding-bottom: 100px;
+    margin-bottom: 70px; */
+
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    padding-bottom: 100px;
+    flex-grow: 1;
     margin-bottom: 70px;
   }
 

@@ -141,10 +141,10 @@ const ServiceRequestsCard = ({ service, isShowServiceRequest }) => {
       <p>Location: {service.address || "N/A"}</p>
       <div className="service-card-body">
         <p>Duration: {service.estimatedDuration || "N/A"}</p>
-        <p>Price: ${service.price || 0}</p>
+        <p>Rs.{service.price || 0}</p>
         <p>Posted By: {service.name}</p>
         <p>Contact: {service.contact}</p>
-        <p>Status: {service.status}</p>
+        <p>Service request status: {service.status}</p>
       </div>
 
       {isShowServiceRequest ? (

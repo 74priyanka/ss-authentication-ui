@@ -56,7 +56,7 @@ const WorkerProfile = () => {
         </div>
 
         <p className="profile-name">{profileName}</p>
-        <p>California, USA</p>
+        <p>India</p>
       </div>
       <div className="profile-content">
         {cardData.map((card) => (

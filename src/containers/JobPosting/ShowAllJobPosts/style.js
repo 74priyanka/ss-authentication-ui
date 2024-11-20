@@ -6,7 +6,7 @@ export const StyledShowJobPost = styled.div`
   padding: 28px;
   height: 100vh; /* Use viewport height */
   position: relative; /* Ensure fixed button is within the container */
-  overflow: hidden;
+  /* overflow: hidden; */
 
   h1 {
     text-align: center;

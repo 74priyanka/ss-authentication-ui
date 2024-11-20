@@ -4,9 +4,9 @@ import { colors } from "../../../Constants/colors";
 export const StyledShowJobPost = styled.div`
   background-color: #eee5fb;
   padding: 28px;
-  height: 100vh; /* Use viewport height */
+  /* height: 100vh;  */
   position: relative; /* Ensure fixed button is within the container */
-  overflow: hidden;
+  /* overflow: hidden; */
 
   h1 {
     text-align: center;
@@ -28,9 +28,15 @@ export const StyledShowJobPost = styled.div`
     width: 100%;
     display: grid;
     gap: 16px;
-    padding-bottom: 100px; /* Space for the fixed button */
-    flex-grow: 1; /* Ensure it takes available space */
-    margin-bottom: 70px; /* Add margin to avoid overlapping with button */
+    padding-bottom: 100px;
+    flex-grow: 1;
+    margin-bottom: 70px;
+
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 100px;
+    margin-bottom: 70px; */
   }
 
   /* Responsive grid layout for Job Cards */

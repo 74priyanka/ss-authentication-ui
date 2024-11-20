@@ -194,7 +194,6 @@ const appRouter = createBrowserRouter([
     element: <AppLayout />,
     children: [
       ...commonAppRoute,
-      // ...workerAppRoute,
 
       {
         element: <WorkerProtectedRoute />,

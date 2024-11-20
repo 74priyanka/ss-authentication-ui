@@ -130,10 +130,10 @@ const JobCard = ({ job, isShowJobPosting }) => {
       <p>Contact: {job.contact}</p>
       <div className="job-card-body">
         <p>{job.service_availability_duration}</p>
-        <p>${job.price}</p>
+        <p>Rs.{job.price}</p>
         <p>Posted By: {job.name}</p>
 
-        <p> {job.status}</p>
+        <p>Job Status: {job.status}</p>
       </div>
 
       {isShowJobPosting ? (

@@ -1,4 +1,4 @@
-const API_URL = "https://skillsync-service-provider-be.onrender.com/";
+const API_URL = "https://skillsync-service-provider-be.onrender.com";
 
 //function to handle customer login
 export const customerLogin = async (credentials) => {

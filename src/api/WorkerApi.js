@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://skillsync-service-provider-be.onrender.com/";
 
 //function to handle worker login
 export const workerLogin = async (credentials) => {

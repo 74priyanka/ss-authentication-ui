@@ -34,6 +34,7 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: ["@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-private-property-in-object"],
         },
       },
     ],

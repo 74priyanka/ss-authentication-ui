@@ -4,7 +4,7 @@ import profilePic from "../../assets/profilePic.png";
 import Buttons from "../../reusableComponents/Buttons";
 import { colors } from "../../Constants/colors";
 import jobHunt from "../../assets/jobHunt.png";
-// import add from "../../assets/add.png";
+import plus from "../../assets/plus.png";
 import Home from "../../assets/Home.png";
 import Chat from "../../assets/Chat.png";
 import { useNavigate } from "react-router-dom";
@@ -26,9 +26,9 @@ const HomeScreen = () => {
     }
   };
 
-  // const handleAddJob = () => {
-  //   navigate("/createJobPost");
-  // };
+  const handleAddJob = () => {
+    navigate("/createJobPost");
+  };
 
   const handleJobs = () => {
     navigate("/showJobPost");
@@ -98,6 +98,7 @@ const HomeScreen = () => {
       <div className="nav-items-list">
         <img src={Home} alt="" onClick={handleHome} />
         {/* <img src={add} alt="" onClick={handleAddJob} /> */}
+        <img src={plus} alt="" onClick={handleAddJob} />
         <img src={Chat} alt="" />
       </div>
       <ShowAllServiceRequests />
